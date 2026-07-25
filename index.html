@@ -278,6 +278,15 @@
     .map-container iframe{
       display:block;
     }
+    .date-line {
+      display:inline-block;
+      direction:rtl;
+      unicode-bidi:isolate;
+      white-space:nowrap;
+    }
+    .date-line bdi{
+      unicode-bidi:isolate;
+    }
   </style>
 </head>
 <body>
@@ -336,21 +345,8 @@
 
         <!-- الصفحة الثانية -->
         <div class="names-tag" id="cap1">
-          <p class="names">سناء &amp; عارف</p>
 
-          <div class="rule"></div>
-          بسم الله الرحمن الرحيم<br>
-          وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
-          [سورة الروم: 21]
-          <p class="line">بكل الحب والفرح</p>
 
-          <p class="line">
-            ندعوكم لمشاركتنا أجمل يوم في حياتنا
-          </p>
-
-          <p class="line date">
-            29 ديسمبر
-          </p>
         </div>
 
 
@@ -379,10 +375,11 @@
             <br><br>
 
            وذلك بمشيئة الله تعالى يوم
-            <br>
-            <strong>6 جويلية 2026</strong>
+            <strong class="date-line"><bdi>6 جويلية 2026</bdi></strong>
             <br>
             على الساعة <strong>16:30</strong>
+
+
             <br><br>
 
             ببلدية القصبة
@@ -574,7 +571,7 @@
               ليلة الفرح والحناء قبل الزفاف
               <br><br>
 
-              <strong>5 ديسمبر</strong>
+              <strong> <bdi>5 ديسمبر</bdi></strong>
             </div>
 
           </div>
