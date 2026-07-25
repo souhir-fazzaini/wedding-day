@@ -6,61 +6,96 @@
   <title>Sana & Atef — Invitation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: radial-gradient(ellipse at 50% 0%, #FFFDF8 0%, #FBF6ED 55%, #F1E7D6 100%);
-      font-family: 'Cormorant Garamond', serif;
-      color: #2E3B3A;
-      min-height: 100vh;
-      overflow-x: hidden;
+    :root{
+      --cream:#FBF6ED;
+      --cream-deep:#F1E7D6;
+      --ink:#2E3B3A;
+      --gold:#B98F4A;
+      --gold-soft:#D9BE8C;
+      --curtain:#F4EEE0;
+      --curtain-shadow:#DCCDA8;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    body{
+      background:radial-gradient(ellipse at 50% 0%, #FFFDF8 0%, var(--cream) 55%, var(--cream-deep) 100%);
+      font-family:'Cormorant Garamond', serif;
+      color:var(--ink);
     }
 
-    /* ===== SCROLL STORY ===== */
-    .story {
-      position: relative;
-      height: 500vh;
-      width: 100%;
+    .top{
+      padding:44px 20px 10px;
+      text-align:center;
+    }
+    .eyebrow{
+      font-family:'Cinzel', serif;
+      font-size:11px;
+      letter-spacing:0.35em;
+      color:var(--gold);
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .heading{
+      font-family:'Cinzel', serif;
+      font-size:clamp(24px,4vw,32px);
+      font-weight:500;
+      letter-spacing:0.08em;
+      margin:0 0 6px;
+    }
+    .heading .amp{ color:var(--gold); font-style:italic; font-weight:400; }
+    .hint{
+      font-size:14.5px;
+      color:#9a917f;
+      font-style:italic;
     }
 
-    .sticky-wrap {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* ---------- SCROLL STORY ---------- */
+    .story{
+      position:relative;
+      height:420vh;
+    }
+    .phone-sticky{
+      position:sticky;
+      top:0;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .slide-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      overflow: hidden;
+    .phone{
+      position:relative;
+      width:100%;
+      height:100vh;
+      background:transparent;
+      padding:0;
+      box-shadow:none;
+    }
+    .screen{
+      position:relative;
+      width:100%; height:100%;
+      border-radius:0;
+      overflow:hidden;
+      background:#cfe7ef;
     }
 
-    /* ===== BACKGROUNDS ===== */
+    /* ========== BACKGROUND IMAGES POUR CHAQUE PAGE ========== */
     .scene-bg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.5s ease;
       z-index: 1;
     }
-
     .scene-bg img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-
     .scene-bg .overlay {
       position: absolute;
       inset: 0;
@@ -71,140 +106,29 @@
     .scene-bg.hidden { opacity: 0; }
     .scene-bg.visible { opacity: 1; }
 
-    /* ===== CONTENU ===== */
-    .slide-content {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      padding: 40px 30px;
-      text-align: center;
-      color: #FBF6ED;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      pointer-events: none;
+    .icons{
+      position:absolute; top:16px; right:14px;
+      display:flex; gap:8px; z-index:25;
     }
-
-    .slide-content.hidden {
-      opacity: 0;
-      transform: translateY(30px);
-      pointer-events: none;
+    .icon-btn{
+      width:26px;height:26px;border-radius:50%;
+      background:rgba(20,30,32,0.35);
+      border:none; display:flex;align-items:center;justify-content:center;
+      color:#fff;
     }
+    .icon-btn svg{ width:12px;height:12px; }
 
-    .slide-content.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .slide-content .names {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(36px, 5vw, 72px);
-      letter-spacing: 0.14em;
-      color: #FBF6ED;
-    }
-
-    .slide-content .rule {
-      width: 80px;
-      height: 2px;
-      background: #D9BE8C;
-      margin: 16px auto;
-      opacity: 0.9;
-    }
-
-    .slide-content .verse {
-      font-size: clamp(16px, 1.8vw, 28px);
-      max-width: 80%;
-      line-height: 1.8;
-      color: #F2EADA;
-    }
-
-    .slide-content .sub {
-      font-size: clamp(18px, 2vw, 32px);
-      color: #F2EADA;
-      font-style: italic;
-      max-width: 80%;
-    }
-
-    .slide-content .date {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(24px, 3vw, 44px);
-      letter-spacing: 0.1em;
-      color: #FBF6ED;
-      margin-top: 10px;
-    }
-
-    .slide-content .eyebrow-sm {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(12px, 1.2vw, 18px);
-      letter-spacing: 0.3em;
-      color: #D9BE8C;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .slide-content .msg {
-      font-size: clamp(18px, 2vw, 32px);
-      line-height: 1.8;
-      max-width: 80%;
-    }
-
-    .slide-content .msg .names {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(30px, 4vw, 56px);
-    }
-
-    .map-container {
-      margin-top: 20px;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      width: 100%;
-      max-width: 500px;
-    }
-
-    .map-container iframe {
-      display: block;
-      width: 100%;
-      height: clamp(200px, 25vw, 350px);
-      border: 0;
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 20;
-      color: #FBF6ED;
-      font-size: 14px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      animation: bob 1.8s ease-in-out infinite;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      opacity: 0.7;
-    }
-
-    @keyframes bob {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(10px); }
-    }
-
-    /* ===== RIDEAUX ===== */
+    /* ========== RIDEAUX AVEC IMAGES ========== */
     .curtain-wrap {
       position: absolute;
       top: 0;
       bottom: 0;
       width: 52%;
-      z-index: 5;
+      z-index: 30;
       overflow: hidden;
       will-change: transform;
       pointer-events: none;
     }
-
     .curtain-wrap.left { left: 0; }
     .curtain-wrap.right { right: 0; transform: scaleX(-1); }
 
@@ -214,6 +138,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
     }
 
@@ -241,219 +166,542 @@
     .curtain-fold-line:nth-child(5) { left: 60%; }
     .curtain-fold-line:nth-child(6) { left: 80%; }
 
-    @media (max-width: 768px) {
-      .slide-content .verse { max-width: 95%; }
-      .slide-content .msg { max-width: 95%; }
-      .slide-content .sub { max-width: 95%; }
+    .valance {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 42px;
+      z-index: 35;
+      background: linear-gradient(180deg, #d4b48c 0%, #c4a07a 100%);
+      -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 32' preserveAspectRatio='none'><path d='M0,0 L100,0 L100,14 C78,36 22,36 0,14 Z' fill='white'/></svg>");
+      mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 32' preserveAspectRatio='none'><path d='M0,0 L100,0 L100,14 C78,36 22,36 0,14 Z' fill='white'/></svg>");
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      opacity: 0.95;
+      box-shadow: 0 4px 20px rgba(80, 60, 40, 0.25);
+    }
+    .valance::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(218, 190, 140, 0.3) 20%, rgba(218, 190, 140, 0.5) 50%, rgba(218, 190, 140, 0.3) 80%, transparent);
+      pointer-events: none;
+    }
+
+    /* overlays */
+    .caption, .names-tag, .card-panel {
+      position: absolute;
+      left: 0; right: 0;
+      text-align: center;
+      z-index: 15;
+      padding: 0 20px;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+      text-shadow: 0 2px 12px rgba(10, 30, 35, 0.6);
+    }
+    .caption { top: 38%; }
+    .caption p {
+      margin: 0;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-size: 16.5px;
+      letter-spacing: 0.03em;
+      line-height: 1.5;
+    }
+    .caption .wave { font-size: 16px; }
+
+    .names-tag {
+      bottom: 24px;
+      text-shadow: 0 2px 15px rgba(5, 25, 30, 0.7);
+    }
+    .names-tag .names { font-family:'Cinzel', serif; font-size:20px; letter-spacing:0.14em; color:#FBF6ED; margin:0; }
+    .names-tag .rule { width:56px;height:1px;background:var(--gold-soft); margin:8px auto; opacity:0.9; }
+    .names-tag .line { font-size:12px; color:#F2EADA; margin:2px 0; font-style:italic; }
+
+    .card-panel {
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 26px;
+      background: linear-gradient(180deg, rgba(28,45,46,0.5), rgba(14,30,32,0.7));
+      backdrop-filter: blur(2px);
+    }
+    .card-panel .eyebrow-sm {
+      font-family:'Cinzel', serif; font-size:10px; letter-spacing:0.3em;
+      color:var(--gold-soft); text-transform:uppercase; margin-bottom:16px;
+    }
+    .card-panel p.msg {
+      color:#FBF6ED; font-size:17px; line-height:1.65; font-style:italic;
+      max-width:210px;
+    }
+    .card-panel .sign {
+      margin-top:18px; font-family:'Cinzel', serif; font-size:14px; letter-spacing:0.12em; color:var(--gold-soft);
+    }
+    .scroll-cue {
+      margin-top:28px; color:#FBF6ED; font-size:11px; letter-spacing:0.15em;
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      animation:bob 1.8s ease-in-out infinite;
+      text-transform:uppercase;
+    }
+    @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
+
+    .monogram-card {
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .monogram-card svg { width:96px; height:96px; margin-bottom:6px; }
+    .monogram-card .title {
+      font-family:'Cinzel', serif; font-size:26px; letter-spacing:0.14em; color:#FBF6ED;
+    }
+    .monogram-card .rule { width:70px; height:1px; background:var(--gold-soft); margin:14px auto; opacity:0.9; }
+    .monogram-card .sub { color:#EFE6D2; font-size:14px; font-style:italic; max-width:200px; line-height:1.6; }
+    .cta {
+      margin-top:22px;
+      font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+      color:#2E3B3A; background:var(--gold-soft);
+      border:none; padding:12px 22px; border-radius:999px; cursor:pointer;
+    }
+
+    .bottom-note {
+      text-align:center; padding:30px 20px 60px;
+      color:#8a8172; font-size:14px; max-width:320px; margin:0 auto; line-height:1.6;
+    }
+    .map-container{
+      margin-top:20px;
+      overflow:hidden;
+      border-radius:15px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .map-container iframe{
+      display:block;
     }
   </style>
 </head>
 <body>
 
-<!-- ===== SCROLL STORY ===== -->
+<audio id="bgMusic" src="Brooklyn Duo - A Thousand Years [WEDDING VERSION].mp4" loop preload="auto"></audio>
+
 <div class="story" id="story">
-  <div class="sticky-wrap">
-    <div class="slide-container" id="slideContainer">
+  <div class="phone-sticky">
+    <div class="phone">
+      <div class="screen" id="screen">
 
-      <!-- ===== BACKGROUNDS ===== -->
-      <div class="scene-bg visible" id="bg0">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect width='1920' height='1080' fill='%23d4c3b0'/%3E%3Ccircle cx='960' cy='300' r='400' fill='%23f4d7b0'/%3E%3Ccircle cx='960' cy='300' r='250' fill='%23f7e5c0'/%3E%3Cpath d='M0 700 Q960 500 1920 700 L1920 1080 L0 1080 Z' fill='%23b8a18c'/%3E%3C/svg%3E" alt="Plage">
+        <!-- ========== BACKGROUNDS POUR CHAQUE PAGE ========== -->
+        <!-- Page 0 : Plage -->
+
+        <!-- Page 1 : Coucher de soleil -->
+        <div class="scene-bg hidden" id="bg1">
+          <img src="img_1.png"/>
+          <div class="overlay"></div>
+        </div>
+        <div class="scene-bg hidden" id="bg2">
+          <img src="img_1.png"/>
+          <div class="overlay"></div>
+        </div>
+
+        <!-- Page 2 : Fleurs -->
+
+        <!-- Page 3 : Ciel étoilé -->
+        <div class="scene-bg hidden" id="bg3">
+          <img src="img_2.png"/>
+          <div class="overlay"></div>
+        </div>
+
+
+        <!-- Page 4 : Woutia -->
+        <div class="scene-bg hidden" id="bg4">
+          <img src="img_3.png"/>
+          <div class="overlay"></div>
+        </div>
+
+
+        <!-- Page 5 : Maps Kobet Ennhas -->
+        <div class="scene-bg hidden" id="bg5">
+          <img src="img_4.png"/>
+          <div class="overlay"></div>
+        </div>
+        <div class="scene-bg hidden" id="bg6">
+        <img src="img_4.png"/>
         <div class="overlay"></div>
       </div>
 
-      <div class="scene-bg hidden" id="bg1">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect width='1920' height='1080' fill='%232d4b5c'/%3E%3Ccircle cx='1400' cy='200' r='300' fill='%23f7c974'/%3E%3Ccircle cx='1400' cy='200' r='180' fill='%23fae3a0'/%3E%3Crect x='0' y='600' width='1920' height='480' fill='%231a2f3a'/%3E%3C/svg%3E" alt="Coucher">
-        <div class="overlay"></div>
-      </div>
 
-      <div class="scene-bg hidden" id="bg2">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect width='1920' height='1080' fill='%233c5a5a'/%3E%3Ccircle cx='500' cy='400' r='200' fill='%23d9a8b0'/%3E%3Ccircle cx='1300' cy='350' r='180' fill='%23d9a8b0'/%3E%3Ccircle cx='900' cy='600' r='250' fill='%23b88a94'/%3E%3C/svg%3E" alt="Fleurs">
-        <div class="overlay"></div>
-      </div>
 
-      <div class="scene-bg hidden" id="bg3">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect width='1920' height='1080' fill='%231b2a36'/%3E%3Ccircle cx='400' cy='200' r='6' fill='%23fff'/%3E%3Ccircle cx='1200' cy='150' r='5' fill='%23fff'/%3E%3Ccircle cx='1600' cy='300' r='8' fill='%23fff'/%3E%3Ccircle cx='300' cy='450' r='5' fill='%23fff'/%3E%3Ccircle cx='900' cy='250' r='6' fill='%23fff'/%3E%3C/svg%3E" alt="Étoiles">
-        <div class="overlay"></div>
-      </div>
+        <!-- الصفحة الأولى -->
+        <!-- الصفحة الأولى -->
 
-      <div class="scene-bg hidden" id="bg4">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect width='1920' height='1080' fill='%23b5a58a'/%3E%3Crect x='200' y='200' width='300' height='400' fill='%23806d5a'/%3E%3Crect x='700' y='150' width='400' height='500' fill='%23806d5a'/%3E%3Crect x='1400' y='250' width='300' height='350' fill='%23806d5a'/%3E%3C/svg%3E" alt="Woutia">
-        <div class="overlay"></div>
-      </div>
 
-      <div class="scene-bg hidden" id="bg5">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect width='1920' height='1080' fill='%2397b3a0'/%3E%3Cpath d='M200 600 L400 450 L600 550 L800 400 L1000 500 L1200 350 L1400 450 L1600 300 L1800 400' stroke='%23657a6a' stroke-width='12' fill='none'/%3E%3C/svg%3E" alt="Map">
-        <div class="overlay"></div>
-      </div>
+        <!-- الصفحة الثانية -->
+        <div class="names-tag" id="cap1">
+          <p class="names">سناء &amp; عارف</p>
 
-      <!-- ===== SLIDE 0 ===== -->
-      <div class="slide-content visible" id="slide0">
-        <div class="names">سناء &amp; عاطف</div>
-        <div class="rule"></div>
-        <div class="verse">
+          <div class="rule"></div>
           بسم الله الرحمن الرحيم<br>
-          وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+          وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
+          [سورة الروم: 21]
+          <p class="line">بكل الحب والفرح</p>
+
+          <p class="line">
+            ندعوكم لمشاركتنا أجمل يوم في حياتنا
+          </p>
+
+          <p class="line date">
+            29 ديسمبر
+          </p>
         </div>
-        <div class="rule"></div>
-        <div class="sub">بكل الحب والفرح</div>
-        <div class="sub">ندعوكم لمشاركتنا أجمل يوم في حياتنا</div>
-        <div class="date">29 ديسمبر 2026</div>
-      </div>
 
-      <!-- ===== SLIDE 1 ===== -->
-      <div class="slide-content hidden" id="slide1">
-        <div class="eyebrow-sm">دعوة زفاف</div>
-        <div class="msg" style="font-style:normal;">
-          بسم الله الرحمن الرحيم
-          <br><br>
-          بكل حب وسعادة،<br>
-          تتشرف عائلة <strong>عادل لملوم</strong><br>
-          بدعوتكم لحضور حفل زفاف ابنيهما
-          <br><br>
-          <span class="names">سناء &amp; عـاطـف</span>
-          <br><br>
-          وذلك بمشيئة الله تعالى يوم<br>
-          <strong>6 جويلية 2026</strong><br>
-          على الساعة <strong>16:30</strong>
-          <br><br>
-          ببلدية القصبة
+
+        <!-- الصفحة الثالثة -->
+        <div class="card-panel" id="cap2" style="opacity:0;">
+
+          <div class="eyebrow-sm">
+            دعوة زفاف
+          </div>
+          <p class="msg">
+            بسم الله الرحمن الرحيم
+            <br>
+            <br>
+
+
+            بكل حب وسعادة،
+            <br>
+            تتشرف عائلة  <strong></strong> و <strong>عادل لملوم</strong>
+            <br>
+            بدعوتكم لحضور حفل زفاف ابنيهما
+
+            <br><br>
+
+            <span class="names">سناء و عـاطـف</span>
+
+            <br><br>
+
+           وذلك بمشيئة الله تعالى يوم
+            <br>
+            <strong>6 جويلية 2026</strong>
+            <br>
+            على الساعة <strong>16:30</strong>
+            <br><br>
+
+            ببلدية القصبة
+          </p>
+
+
+
+
         </div>
-      </div>
+        <div class="card-panel" id="cap3" style="opacity:0;">
 
-      <!-- ===== SLIDE 2 ===== -->
-      <div class="slide-content hidden" id="slide2">
-        <svg viewBox="0 0 100 100" width="clamp(100px, 12vw, 180px)" height="clamp(100px, 12vw, 180px)">
-          <path d="M20,70 Q20,20 50,20 Q80,20 80,70" fill="none" stroke="#FBF6ED" stroke-width="2.4"/>
-          <path d="M38,20 Q42,10 50,10 Q58,10 62,20" fill="none" stroke="#FBF6ED" stroke-width="1.4" opacity="0.85"/>
-          <text x="50" y="52" text-anchor="middle" font-family="Cinzel, serif" font-size="26" fill="#FBF6ED">س</text>
-          <text x="50" y="76" text-anchor="middle" font-family="Cinzel, serif" font-size="26" fill="#FBF6ED">ع</text>
-          <path d="M28,60 Q39,54 50,60 T72,60" fill="none" stroke="#D9BE8C" stroke-width="1.4"/>
-        </svg>
-        <div style="font-family:'Cinzel',serif;font-size:clamp(28px,3.5vw,52px);color:#FBF6ED;margin-top:10px;">سناء &amp; عاطف</div>
-        <div class="rule"></div>
-        <div class="sub">بارك الله لكما وبارك عليكما وجمع بينكما في خير</div>
-      </div>
+          <div class="monogram-card">
 
-      <!-- ===== SLIDE 3 ===== -->
-      <div class="slide-content hidden" id="slide3">
-        <div class="eyebrow-sm">المكان</div>
-        <div style="font-family:'Cinzel',serif;font-size:clamp(28px,3.5vw,52px);color:#FBF6ED;">بلدية القصبة</div>
-        <div class="rule"></div>
-        <div class="sub">
-          يسعدنا حضوركم ومشاركتنا فرحتنا
-          <br><br>
-          📍 قبة النحاس
-          <br>
-          29 ديسمبر 2026
+            <svg viewBox="0 0 100 100">
+
+              <path d="M20,70 Q20,20 50,20 Q80,20 80,70"
+                    fill="none"
+                    stroke="#FBF6ED"
+                    stroke-width="2.4"/>
+
+
+              <path d="M38,20 Q42,10 50,10 Q58,10 62,20"
+                    fill="none"
+                    stroke="#FBF6ED"
+                    stroke-width="1.4"
+                    opacity="0.85"/>
+
+
+              <text x="50"
+                    y="52"
+                    text-anchor="middle"
+                    font-family="Cinzel, serif"
+                    font-size="26"
+                    fill="#FBF6ED">
+                س
+              </text>
+
+
+              <text x="50"
+                    y="76"
+                    text-anchor="middle"
+                    font-family="Cinzel, serif"
+                    font-size="26"
+                    fill="#FBF6ED">
+                ع
+              </text>
+
+
+              <path d="M28,60 Q39,54 50,60 T72,60"
+                    fill="none"
+                    stroke="#D9BE8C"
+                    stroke-width="1.4"/>
+
+            </svg>
+
+
+
+
+
+
+
+
+          </div>
+
         </div>
-        <div class="map-container">
-          <iframe
-                  src="https://www.google.com/maps?q=36.7988582,10.1657737&output=embed"
-                  loading="lazy">
-          </iframe>
+
+        <div class="card-panel" id="cap4" style="opacity:0;">
+
+          <div class="monogram-card">
+
+            <div class="eyebrow-sm">
+              المكان
+            </div>
+
+
+            <div class="title">
+              بلدية القصبة
+            </div>
+
+
+            <div class="rule"></div>
+
+
+            <div class="sub">
+
+              يسعدنا حضوركم ومشاركتنا فرحتنا
+              <br><br>
+
+              📍    بلدية القصبة
+              <br>
+
+            </div>
+
+
+            <div class="map-container">
+
+              <iframe
+                      src="https://www.google.com/maps?q=36.7988582,10.1657737&output=embed"
+                      width="400"
+                      height="300"
+                      style="border:0;border-radius:15px;"
+                      allowfullscreen=""
+                      loading="lazy">
+              </iframe>
+
+            </div>
+
+
+
+          </div>
+
         </div>
-      </div>
 
-      <!-- ===== SLIDE 4 ===== -->
-      <div class="slide-content hidden" id="slide4">
-        <div class="eyebrow-sm">ليلة الحناء</div>
-        <div style="font-family:'Cinzel',serif;font-size:clamp(28px,3.5vw,52px);color:#FBF6ED;">العشاء &amp; وطية</div>
-        <div class="rule"></div>
-        <div class="sub">
-          ندعوكم لمشاركتنا ليلة من أجمل التقاليد التونسية
-          <br>
-          ليلة الفرح والحناء قبل الزفاف
-          <br><br>
-          <strong style="font-size:clamp(20px,2.5vw,38px);">26 ديسمبر 2026</strong>
+        <!-- الصفحة الرابعة -->
+        <div class="card-panel" id="cap5" style="opacity:0;">
+
+          <div class="monogram-card">
+
+            <svg viewBox="0 0 100 100">
+
+              <path d="M20,70 Q20,20 50,20 Q80,20 80,70"
+                    fill="none"
+                    stroke="#FBF6ED"
+                    stroke-width="2.4"/>
+
+
+              <path d="M38,20 Q42,10 50,10 Q58,10 62,20"
+                    fill="none"
+                    stroke="#FBF6ED"
+                    stroke-width="1.4"
+                    opacity="0.85"/>
+
+
+              <text x="50"
+                    y="52"
+                    text-anchor="middle"
+                    font-family="Cinzel, serif"
+                    font-size="26"
+                    fill="#FBF6ED">
+                س
+              </text>
+
+
+              <text x="50"
+                    y="76"
+                    text-anchor="middle"
+                    font-family="Cinzel, serif"
+                    font-size="26"
+                    fill="#FBF6ED">
+                ع
+              </text>
+
+
+              <path d="M28,60 Q39,54 50,60 T72,60"
+                    fill="none"
+                    stroke="#D9BE8C"
+                    stroke-width="1.4"/>
+
+            </svg>
+
+
+
+
+
+
+
+
+          </div>
+
         </div>
-      </div>
+        <!-- الصفحة الخامسة : الغولة / الوطية -->
+        <div class="card-panel" id="cap6" style="opacity:0;">
 
-      <!-- ===== SLIDE 5 ===== -->
-      <div class="slide-content hidden" id="slide5">
-        <svg viewBox="0 0 100 100" width="clamp(100px, 12vw, 180px)" height="clamp(100px, 12vw, 180px)">
-          <path d="M20,70 Q20,20 50,20 Q80,20 80,70" fill="none" stroke="#FBF6ED" stroke-width="2.4"/>
-          <path d="M38,20 Q42,10 50,10 Q58,10 62,20" fill="none" stroke="#FBF6ED" stroke-width="1.4" opacity="0.85"/>
-          <text x="50" y="52" text-anchor="middle" font-family="Cinzel, serif" font-size="26" fill="#FBF6ED">س</text>
-          <text x="50" y="76" text-anchor="middle" font-family="Cinzel, serif" font-size="26" fill="#FBF6ED">ع</text>
-          <path d="M28,60 Q39,54 50,60 T72,60" fill="none" stroke="#D9BE8C" stroke-width="1.4"/>
-        </svg>
-        <div style="font-family:'Cinzel',serif;font-size:clamp(28px,3.5vw,52px);color:#FBF6ED;margin-top:10px;">شكراً لحضوركم</div>
-        <div class="rule"></div>
-        <div class="sub">نتشرف بحضوركم في يوم عرسنا<br>نسأل الله أن يجمعنا بكم في الخير</div>
-      </div>
+          <div class="monogram-card">
 
-      <!-- ===== RIDEAUX ===== -->
-      <div class="curtain-wrap left" id="curtainLeftWrap">
-        <img class="curtain-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='1080' viewBox='0 0 200 1080'%3E%3Crect width='200' height='1080' fill='%23c49a6c'/%3E%3Cpath d='M0 0 L200 0 L200 1080 L0 1080 Z' fill='%23d4b08a'/%3E%3Ccircle cx='100' cy='200' r='80' fill='%23e8c9a8' opacity='0.4'/%3E%3Ccircle cx='100' cy='600' r='70' fill='%23e8c9a8' opacity='0.4'/%3E%3C/svg%3E" alt="Rideau">
-        <div class="curtain-drape"></div>
-        <div class="curtain-fold-line"></div>
-        <div class="curtain-fold-line"></div>
-        <div class="curtain-fold-line"></div>
-        <div class="curtain-fold-line"></div>
-        <div class="curtain-fold-line"></div>
-      </div>
-      <div class="curtain-wrap right" id="curtainRightWrap">
-        <img class="curtain-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='1080' viewBox='0 0 200 1080'%3E%3Crect width='200' height='1080' fill='%23c49a6c'/%3E%3Cpath d='M0 0 L200 0 L200 1080 L0 1080 Z' fill='%23d4b08a'/%3E%3Ccircle cx='100' cy='200' r='80' fill='%23e8c9a8' opacity='0.4'/%3E%3Ccircle cx='100' cy='600' r='70' fill='%23e8c9a8' opacity='0.4'/%3E%3C/svg%3E" alt="Rideau">
-        <div class="curtain-drape"></div>
-        <div class="curtain-fold-line"></div>
-        <div class="curtain-fold-line"></div>
-        <div class="curtain-fold-line"></div>
-        <div class="curtain-fold-line"></div>
-        <div class="curtain-fold-line"></div>
-      </div>
+            <div class="eyebrow-sm">
+              ليلة الحناء
+            </div>
 
-      <!-- Scroll indicator -->
-      <div class="scroll-indicator">↓ Défilez ↓</div>
+            <div class="title">
+              العشاء &amp; وطية
+            </div>
 
+            <div class="rule"></div>
+
+            <div class="sub">
+              ندعوكم لمشاركتنا ليلة من أجمل التقاليد التونسية
+              <br>
+              ليلة الفرح والحناء قبل الزفاف
+              <br><br>
+
+              <strong>5 ديسمبر</strong>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- الصفحة السابعة : الشكر -->
+        <div class="card-panel" id="cap7" style="opacity:0;">
+
+          <div class="monogram-card">
+
+            <svg viewBox="0 0 100 100">
+              <path d="M20,70 Q20,20 50,20 Q80,20 80,70"
+                    fill="none" stroke="#FBF6ED" stroke-width="2.4"/>
+              <path d="M38,20 Q42,10 50,10 Q58,10 62,20"
+                    fill="none" stroke="#FBF6ED" stroke-width="1.4" opacity="0.85"/>
+              <path d="M28,60 Q39,54 50,60 T72,60"
+                    fill="none" stroke="#D9BE8C" stroke-width="1.4"/>
+            </svg>
+
+            <div class="eyebrow-sm">
+              بكل الشكر والامتنان
+            </div>
+
+            <div class="rule"></div>
+
+            <div class="sub">
+              شكراً لكم من كل قلبنا
+              <br>
+              لتواجدكم معنا في هذه اللحظات الجميلة
+              <br>
+              حضوركم هو أجمل هدية
+            </div>
+
+          </div>
+
+        </div>
+
+        ²
+
+        <!-- الصفحة السادسة : المكان -->
+
+
+        <!-- ========== RIDEAUX ========== -->
+        <div class="curtain-wrap left" id="curtainLeftWrap">
+          <img class="curtain-image" src="7105fc18d40394eb32283bae36d218ccf85e47e7.jpg" alt="Rideau floral">
+          <div class="curtain-drape"></div>
+          <div class="curtain-fold-line"></div>
+          <div class="curtain-fold-line"></div>
+          <div class="curtain-fold-line"></div>
+          <div class="curtain-fold-line"></div>
+          <div class="curtain-fold-line"></div>
+        </div>
+
+        <div class="curtain-wrap right" id="curtainRightWrap">
+          <img class="curtain-image" src="7105fc18d40394eb32283bae36d218ccf85e47e7.jpg" alt="Rideau floral">
+          <div class="curtain-drape"></div>
+          <div class="curtain-fold-line"></div>
+          <div class="curtain-fold-line"></div>
+          <div class="curtain-fold-line"></div>
+          <div class="curtain-fold-line"></div>
+          <div class="curtain-fold-line"></div>
+        </div>
+
+
+      </div>
     </div>
   </div>
 </div>
+
 
 <script>
   const story = document.getElementById('story');
   const leftWrap = document.getElementById('curtainLeftWrap');
   const rightWrap = document.getElementById('curtainRightWrap');
-  const slides = [
-    document.getElementById('slide0'),
-    document.getElementById('slide1'),
-    document.getElementById('slide2'),
-    document.getElementById('slide3'),
-    document.getElementById('slide4'),
-    document.getElementById('slide5')
+  const panels = [
+    document.getElementById('cap1'),
+    document.getElementById('cap2'),
+    document.getElementById('cap3'),
+    document.getElementById('cap4'),
+    document.getElementById('cap5'),
+    document.getElementById('cap6'),
+    document.getElementById('cap7')
+
+
   ];
+
+  // Backgrounds pour chaque page
   const backgrounds = [
-    document.getElementById('bg0'),
     document.getElementById('bg1'),
     document.getElementById('bg2'),
     document.getElementById('bg3'),
     document.getElementById('bg4'),
-    document.getElementById('bg5')
+    document.getElementById('bg5'),
+    document.getElementById('bg6')
+
   ];
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
-  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-
-  function onScroll() {
+  function onScroll(){
     const rect = story.getBoundingClientRect();
     const vh = window.innerHeight;
     const total = story.offsetHeight - vh;
     const scrolled = clamp(-rect.top, 0, total);
     const progress = total > 0 ? scrolled / total : 0;
-    const activeFloat = progress * (slides.length - 1);
+    const activeFloat = progress * 6;
 
     // Rideaux
-    const curtainOpen = clamp(activeFloat / (slides.length - 1) * 1.3, 0, 1);
+    const curtainOpen = clamp(activeFloat, 0, 1);
     const translate = -104 * curtainOpen;
     leftWrap.style.transform = `translateX(${translate}%)`;
     rightWrap.style.transform = `scaleX(-1) translateX(${translate}%)`;
 
-    // Slides et backgrounds
-    slides.forEach((slide, i) => {
+    // Pages et backgrounds
+    panels.forEach((p, i) => {
       const d = 1 - Math.abs(activeFloat - i);
       const op = clamp(d, 0, 1);
-      slide.className = `slide-content ${op > 0.3 ? 'visible' : 'hidden'}`;
+      p.style.opacity = op;
+      p.style.transform = i >= 2 ? `translateY(${(1 - op) * 16}px)` : '';
+      p.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
 
+      // Background correspondant
       if (backgrounds[i]) {
-        backgrounds[i].className = `scene-bg ${op > 0.3 ? 'visible' : 'hidden'}`;
+        if (op > 0.3) {
+          backgrounds[i].className = 'scene-bg visible';
+        } else {
+          backgrounds[i].className = 'scene-bg hidden';
+        }
       }
     });
   }
@@ -461,6 +709,51 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   onScroll();
+  const bgMusic = document.getElementById('bgMusic');
+  const soundToggle = document.getElementById('soundToggle');
+  const iconOn = document.getElementById('soundIconOn');
+  const iconOff = document.getElementById('soundIconOff');
+  let musicPlaying = false;
+
+  function updateIcon(){
+    iconOn.style.display = musicPlaying ? 'block' : 'none';
+    iconOff.style.display = musicPlaying ? 'none' : 'block';
+  }
+
+  function startMusic(){
+    bgMusic.volume = 0.6;
+    bgMusic.play().then(() => {
+      musicPlaying = true;
+      updateIcon();
+    }).catch(() => {
+      musicPlaying = false;
+      updateIcon();
+    });
+  }
+
+  window.addEventListener('load', startMusic);
+
+  function tryStartOnce(){
+    if (!musicPlaying) startMusic();
+    window.removeEventListener('scroll', tryStartOnce);
+    window.removeEventListener('touchstart', tryStartOnce);
+    window.removeEventListener('click', tryStartOnce);
+  }
+  window.addEventListener('scroll', tryStartOnce, { passive: true, once: true });
+  window.addEventListener('touchstart', tryStartOnce, { once: true });
+  window.addEventListener('click', tryStartOnce, { once: true });
+
+  soundToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (musicPlaying) {
+      bgMusic.pause();
+      musicPlaying = false;
+    } else {
+      bgMusic.play();
+      musicPlaying = true;
+    }
+    updateIcon();
+  });
 </script>
 
 </body>
