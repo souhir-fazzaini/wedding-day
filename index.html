@@ -228,19 +228,32 @@
         position: fixed !important;
         top: 50% !important;
         left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: 100% !important;
+        width: 100vw !important;
         height: auto !important;
         object-fit: contain !important;
-        z-index: 1 !important;
+        transform: translate(-50%, -50%) scaleY(2.8) !important;
+        z-index: 0 !important;
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
-      .video-bg-blur {
-        display: block !important;
+
+      .screen {
+        height: 100vh !important;
+        width: 100% !important;
+        overflow: hidden !important;
       }
-      .screen { height: 100vh !important; width: 100% !important; overflow: hidden !important; }
-      .phone { height: 100vh !important; width: 100% !important; }
-      .phone-sticky { height: 100vh !important; width: 100vw !important; overflow: hidden !important; }
+
+      .phone {
+        height: 100vh !important;
+        width: 100% !important;
+      }
+
+      .phone-sticky {
+        height: 100vh !important;
+        width: 100vw !important;
+        overflow: hidden !important;
+      }
     }
 
     @media (max-width: 480px) {
@@ -248,17 +261,14 @@
         position: fixed !important;
         top: 50% !important;
         left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: 100% !important;
+        width: 100vw !important;
         height: auto !important;
         object-fit: contain !important;
-        z-index: 1 !important;
+        transform: translate(-50%, -50%) scaleY(1.5) !important;
+        z-index: 0 !important;
       }
     }
 
-    @media (min-width: 769px) {
-      .video-bg-blur { display: none; } /* pas besoin sur desktop */
-    }
 
     /* ========== BACKGROUND IMAGES POUR CHAQUE PAGE ========== */
     .scene-bg {
