@@ -102,6 +102,157 @@
       margin: 15px auto 0;
       opacity: 0.9;
     }
+    /* ========== CSS PERSONNALISÉ POUR MOBILE ========== */
+
+    /* Pour tous les mobiles */
+    @media (max-width: 768px) {
+
+      /* La vidéo prend tout l'écran */
+      .video-bg {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: cover !important;
+        z-index: 1 !important;
+      }
+
+      /* Le conteneur principal */
+      .screen {
+        width: 100vw !important;
+        height: 100vh !important;
+        overflow: hidden !important;
+      }
+
+      .phone {
+        width: 100vw !important;
+        height: 100vh !important;
+      }
+
+      .phone-sticky {
+        width: 100vw !important;
+        height: 100vh !important;
+      }
+
+      /* Overlay texte sur la vidéo */
+      .video-overlay {
+        padding: 15px 10px !important;
+        background: rgba(0,0,0,0.4) !important;
+      }
+
+      .video-overlay .verse-text {
+        font-size: 14px !important;
+        line-height: 2.2 !important;
+        padding: 0 8px !important;
+      }
+
+      .video-overlay .verse-line {
+        margin: 3px auto !important;
+      }
+
+      .video-overlay .verse-divider {
+        width: 50px !important;
+        margin: 10px auto !important;
+      }
+
+      .video-overlay .verse-reference {
+        font-size: 12px !important;
+      }
+
+      .video-overlay .rule {
+        width: 40px !important;
+        margin: 10px auto 0 !important;
+      }
+    }
+
+    /* Pour les très petits mobiles (moins de 480px) */
+    @media (max-width: 480px) {
+
+      .video-bg {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+      }
+
+      .video-overlay .verse-text {
+        font-size: 12px !important;
+        line-height: 2 !important;
+        padding: 0 5px !important;
+      }
+
+      .video-overlay .verse-line {
+        margin: 2px auto !important;
+      }
+
+      .video-overlay .verse-divider {
+        width: 40px !important;
+        margin: 8px auto !important;
+      }
+
+      .video-overlay .verse-reference {
+        font-size: 10px !important;
+      }
+
+      .screen, .phone, .phone-sticky {
+        width: 100% !important;
+        height: 100vh !important;
+      }
+    }
+
+    /* Pour les tablettes */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .video-bg {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+      }
+
+      .video-overlay .verse-text {
+        font-size: 18px !important;
+        line-height: 2.4 !important;
+      }
+    }
+
+    /* Pour les mobiles en mode paysage */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .video-bg {
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: cover !important;
+      }
+
+      .video-overlay .verse-text {
+        font-size: 12px !important;
+        line-height: 1.8 !important;
+      }
+
+      .video-overlay {
+        padding: 10px !important;
+      }
+    }
+
+    /* Correction pour Samsung et Android */
+    @supports (-webkit-touch-callout: none) {
+      .video-bg {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+      }
+    }
+
+    /* Correction pour iOS Safari */
+    @supports (-webkit-overflow-scrolling: touch) {
+      .video-bg {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        position: fixed !important;
+      }
+    }
 
     /* ========== SCENE BG ========== */
     .scene-bg {
