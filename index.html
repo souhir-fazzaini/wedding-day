@@ -2,247 +2,108 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Sana & Aref — Invitation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --cream:#FBF6ED;
-      --cream-deep:#F1E7D6;
-      --ink:#2E3B3A;
-      --gold:#B98F4A;
-      --gold-soft:#D9BE8C;
-      --curtain:#F4EEE0;
-      --curtain-shadow:#DCCDA8;
-    }
-    *{box-sizing:border-box;}
-    html,body{margin:0;padding:0;}
-    body{
-      background:radial-gradient(ellipse at 50% 0%, #FFFDF8 0%, var(--cream) 55%, var(--cream-deep) 100%);
-      font-family:'Cormorant Garamond', serif;
-      color:var(--ink);
-      overflow-x:hidden;
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{width:100%;height:100%;overflow-x:hidden;}
 
-    .top{
-      padding:44px 20px 10px;
-      text-align:center;
-    }
-    .eyebrow{
-      font-family:'Cinzel', serif;
-      font-size:11px;
-      letter-spacing:0.35em;
-      color:var(--gold);
-      text-transform:uppercase;
-      margin-bottom:10px;
-    }
-    /* ========== STYLES POUR LA DATE CACHÉE ========== */
-    .date-gift-container {
-      display: inline-block;
-      position: relative;
-      cursor: pointer;
-      margin: 10px 0;
-      pointer-events: auto;
-    }
-
-    .date-gift-box {
-      display: inline-block;
-      padding: 16px 35px;
-      background: linear-gradient(145deg, #f5e6d3, #e8d5c0);
-      border-radius: 50px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 2px 0 rgba(255,255,255,0.3);
-      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-      border: 2px solid #D9BE8C;
-      min-width: 180px;
-    }
-
-    .date-gift-box .gift-icon {
-      font-size: 32px;
-      display: block;
-      margin-bottom: 2px;
-      transition: transform 0.3s ease;
-    }
-
-    .date-gift-box .gift-hint {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 14px;
-      color: #2E3B3A;
-      letter-spacing: 0.08em;
-      font-style: italic;
-      opacity: 0.7;
-      display: block;
-    }
-
-    /* Quand la date est révélée */
-    .date-gift-box.revealed {
-      background: linear-gradient(145deg, #f5e6d3, #e8d5c0);
-      border-color: #B98F4A;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      padding: 16px 35px;
-    }
-
-    .date-gift-box.revealed .gift-icon {
-      display: none;
-    }
-
-    .date-gift-box.revealed .gift-hint {
-      display: none;
-    }
-
-    .date-gift-box.revealed .revealed-date {
-      display: block !important;
-    }
-
-    .revealed-date {
-      display: none !important;
-      font-family: 'Cinzel', serif;
-      font-size: 24px;
-      font-weight: 600;
-      color: #B98F4A;
-      letter-spacing: 0.1em;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.3);
-    }
-
-    /* Effet hover */
-    .date-gift-box:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    }
-
-    .date-gift-box:hover .gift-icon {
-      transform: scale(1.1) rotate(-5deg);
-    }
-
-    /* Animation d'ouverture */
-    @keyframes dateReveal {
-      0% { transform: scale(1); }
-      30% { transform: scale(1.1); }
-      50% { transform: scale(0.95); }
-      70% { transform: scale(1.03); }
-      100% { transform: scale(1); }
-    }
-
-    .date-gift-box.opening {
-      animation: dateReveal 0.6s ease;
-    }
-
-    /* Effet de brillance */
-    .date-gift-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s;
-    }
-
-    .date-gift-box:hover::before {
-      transform: translateX(100%);
-    }
-
-    /* Petites particules d'or */
-    @keyframes goldParticles {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-    }
-
-    .gold-particle {
-      position: absolute;
-      font-size: 14px;
-      pointer-events: none;
-      animation: goldParticles 0.8s ease forwards;
-    }
-
-    .heading{
-      font-family:'Cinzel', serif;
-      font-size:clamp(24px,4vw,32px);
-      font-weight:500;
-      letter-spacing:0.08em;
-      margin:0 0 6px;
-    }
-    .heading .amp{ color:var(--gold); font-style:italic; font-weight:400; }
-    .hint{
-      font-size:14.5px;
-      color:#9a917f;
-      font-style:italic;
-    }
-
-    /* ---------- SCROLL STORY ---------- */
     .story{
       position:relative;
+      width:100%;
       height:720vh;
     }
     .phone-sticky{
       position:sticky;
       top:0;
+      width:100%;
       height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
     }
-
     .phone{
       position:relative;
       width:100%;
       height:100vh;
-      background:transparent;
-      padding:0;
-      box-shadow:none;
     }
     .screen{
       position:relative;
-      width:100%; height:100%;
-      border-radius:0;
+      width:100%;
+      height:100vh;
       overflow:hidden;
-      background:#cfe7ef;
+      background:#1a2a3a;
     }
 
-    /* ========== VIDEO BACKGROUND ========== */
-    /* ========== VIDEO BACKGROUND ========== */
-    /* Forcer la vidéo à s'afficher sur mobile */
-    @media (max-width: 768px) {
-      .video-bg {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        min-width: 100% !important;
-        min-height: 100% !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-      }
-
-      .screen {
-        height: 100vh !important;
-        width: 100% !important;
-      }
-
-      .phone {
-        height: 100vh !important;
-        width: 100% !important;
-      }
-
-      .phone-sticky {
-        height: 100vh !important;
-        width: 100% !important;
-      }
+    /* ========== VIDEO 100% LARGEUR ========== */
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover;
+      z-index: 1;
+      background: #1a2a3a;
     }
 
-    @media (max-width: 480px) {
-      .video-bg {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        min-width: 100% !important;
-        min-height: 100% !important;
-      }
+    /* ========== OVERLAY ========== */
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      text-align: center;
+      direction: rtl;
+      width: 100%;
+      height: 100%;
     }
 
-    /* ========== BACKGROUND IMAGES POUR CHAQUE PAGE ========== */
+    .video-overlay .verse-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 4vw, 28px);
+      line-height: 2.4;
+      color: #FBF6ED;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+      width: 100%;
+      max-width: 800px;
+      padding: 0 15px;
+      word-wrap: break-word;
+    }
+
+    .video-overlay .verse-text .highlight { color: #D9BE8C; font-weight: 600; }
+    .video-overlay .verse-line { display: block; width: 100%; margin: 5px auto; }
+    .video-overlay .verse-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #D9BE8C, transparent);
+      margin: 15px auto;
+      opacity: 0.6;
+    }
+    .video-overlay .verse-reference {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(14px, 2.5vw, 20px);
+      color: #D9BE8C;
+      letter-spacing: 0.1em;
+      opacity: 0.9;
+    }
+    .video-overlay .rule {
+      width: 56px;
+      height: 1px;
+      background: #D9BE8C;
+      margin: 15px auto 0;
+      opacity: 0.9;
+    }
+
+    /* ========== SCENE BG ========== */
     .scene-bg {
       position: absolute;
       inset: 0;
@@ -250,6 +111,7 @@
       height: 100%;
       transition: opacity 0.5s ease;
       z-index: 1;
+      overflow: hidden;
     }
     .scene-bg img {
       width: 100%;
@@ -263,326 +125,150 @@
       background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%);
       pointer-events: none;
     }
-
     .scene-bg.hidden { opacity: 0; }
     .scene-bg.visible { opacity: 1; }
 
-    .icons{
-      position:absolute; top:16px; right:14px;
-      display:flex; gap:8px; z-index:25;
-    }
-    .icon-btn{
-      width:26px;height:26px;border-radius:50%;
-      background:rgba(20,30,32,0.35);
-      border:none; display:flex;align-items:center;justify-content:center;
-      color:#fff;
-    }
-    .icon-btn svg{ width:12px;height:12px; }
-
-    /* overlays */
-    .caption, .names-tag, .card-panel {
-      position: absolute;
-      left: 0; right: 0;
-      text-align: center;
-      z-index: 15;
-      padding: 0 20px;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      pointer-events: none;
-      text-shadow: 0 2px 12px rgba(10, 30, 35, 0.6);
-    }
-    .caption { top: 38%; }
-    .caption p {
-      margin: 0;
-      color: #fff;
-      font-family: 'Cinzel', serif;
-      font-size: 16.5px;
-      letter-spacing: 0.03em;
-      line-height: 1.5;
-    }
-    .caption .wave { font-size: 16px; }
-
-    .names-tag {
-      bottom: 70px;
-      text-shadow: 0 2px 15px rgba(5, 25, 30, 0.7);
-    }
-    .names-tag .names { font-family:'Cinzel', serif; font-size:20px; letter-spacing:0.14em; color:#FBF6ED; margin:0; }
-    .names-tag .rule { width:56px;height:1px;background:var(--gold-soft); margin:8px auto; opacity:0.9; }
-    .names-tag .line { font-size:12px; color:#F2EADA; margin:2px 0; font-style:italic; }
-
+    /* ========== CARD PANEL ========== */
     .card-panel {
+      position: absolute;
       inset: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      z-index: 15;
       padding: 40px 26px;
       background: linear-gradient(180deg, rgba(28,45,46,0.5), rgba(14,30,32,0.7));
       backdrop-filter: blur(2px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+      text-shadow: 0 2px 12px rgba(10,30,35,0.6);
     }
     .card-panel .eyebrow-sm {
-      font-family:'Cinzel', serif; font-size:10px; letter-spacing:0.3em;
-      color:var(--gold-soft); text-transform:uppercase; margin-bottom:16px;
+      font-family:'Cinzel', serif;
+      font-size:10px;
+      letter-spacing:0.3em;
+      color:#D9BE8C;
+      text-transform:uppercase;
+      margin-bottom:16px;
     }
     .card-panel p.msg {
-      color:#FBF6ED; font-size:17px; line-height:1.65; font-style:italic;
+      color:#FBF6ED;
+      font-size:17px;
+      line-height:1.65;
+      font-style:italic;
       max-width:210px;
     }
-    .card-panel .sign {
-      margin-top:18px; font-family:'Cinzel', serif; font-size:14px; letter-spacing:0.12em; color:var(--gold-soft);
-    }
-    .scroll-cue {
-      margin-top:28px; color:#FBF6ED; font-size:11px; letter-spacing:0.15em;
-      display:flex; flex-direction:column; align-items:center; gap:6px;
-      animation:bob 1.8s ease-in-out infinite;
-      text-transform:uppercase;
-    }
-    @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
 
-    .monogram-card {
-      display:flex; flex-direction:column; align-items:center;
+    /* ========== DATE GIFT ========== */
+    .date-gift-container {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      margin: 10px 0;
+      pointer-events: auto;
     }
+    .date-gift-box {
+      display: inline-block;
+      padding: 16px 35px;
+      background: linear-gradient(145deg, #f5e6d3, #e8d5c0);
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transition: all 0.6s cubic-bezier(0.34,1.56,0.64,1);
+      position: relative;
+      border: 2px solid #D9BE8C;
+      min-width: 180px;
+    }
+    .date-gift-box .gift-icon {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .date-gift-box .gift-hint {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      color: #2E3B3A;
+      letter-spacing: 0.08em;
+      font-style: italic;
+      opacity: 0.7;
+      display: block;
+    }
+    .date-gift-box.revealed .gift-icon,
+    .date-gift-box.revealed .gift-hint { display: none; }
+    .date-gift-box.revealed .revealed-date { display: block !important; }
+    .revealed-date {
+      display: none !important;
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: #B98F4A;
+      letter-spacing: 0.1em;
+    }
+    @keyframes dateReveal {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.1); }
+      50% { transform: scale(0.95); }
+      70% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    .date-gift-box.opening { animation: dateReveal 0.6s ease; }
+    .gold-particle {
+      position: absolute;
+      font-size: 14px;
+      pointer-events: none;
+      animation: goldParticles 0.8s ease forwards;
+    }
+    @keyframes goldParticles {
+      0% { transform: translate(0,0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--tx),var(--ty)) scale(0); opacity: 0; }
+    }
+
+    /* ========== MONOGRAM ========== */
+    .monogram-card { display:flex; flex-direction:column; align-items:center; }
     .monogram-card svg { width:96px; height:96px; margin-bottom:6px; }
     .monogram-card .title {
-      font-family:'Cinzel', serif; font-size:26px; letter-spacing:0.14em; color:#FBF6ED;
+      font-family:'Cinzel', serif;
+      font-size:26px;
+      letter-spacing:0.14em;
+      color:#FBF6ED;
     }
-    .monogram-card .rule { width:70px; height:1px; background:var(--gold-soft); margin:14px auto; opacity:0.9; }
-    .monogram-card .sub { color:#EFE6D2; font-size:14px; font-style:italic; max-width:200px; line-height:1.6; }
-    .cta {
-      margin-top:22px;
-      font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
-      color:#2E3B3A; background:var(--gold-soft);
-      border:none; padding:12px 22px; border-radius:999px; cursor:pointer;
+    .monogram-card .rule {
+      width:70px;
+      height:1px;
+      background:#D9BE8C;
+      margin:14px auto;
+      opacity:0.9;
     }
-
-    .bottom-note {
-      text-align:center; padding:30px 20px 60px;
-      color:#8a8172; font-size:14px; max-width:320px; margin:0 auto; line-height:1.6;
+    .monogram-card .sub {
+      color:#EFE6D2;
+      font-size:14px;
+      font-style:italic;
+      max-width:200px;
+      line-height:1.6;
     }
-    .map-container{
+    .map-container {
       margin-top:20px;
       overflow:hidden;
       border-radius:15px;
       box-shadow:0 10px 25px rgba(0,0,0,0.3);
     }
-
-    .map-container iframe{
+    .map-container iframe {
       display:block;
+      width:100%;
+      max-width:400px;
+      height:300px;
+      border:0;
     }
-    .date-line {
-      display:inline-block;
-      direction:rtl;
-      unicode-bidi:isolate;
-      white-space:nowrap;
-    }
-    .date-line bdi{
-      unicode-bidi:isolate;
-    }
-
-    /* ========== STYLES POUR LE BOUTON CALENDRIER ========== */
-    .calendar-wrapper {
-      margin-top: 12px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
+    .names {
+      font-family:'Cinzel', serif;
+      font-size:20px;
+      letter-spacing:0.14em;
+      color:#FBF6ED;
     }
 
-    .calendar-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 28px;
-      background: linear-gradient(135deg, #D9BE8C 0%, #B98F4A 100%);
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 60px;
-      color: #2E3B3A;
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 20px rgba(185, 143, 74, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Effet de brillance au survol */
-    .calendar-btn::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.6s;
-      pointer-events: none;
-    }
-
-    .calendar-btn:hover::before {
-      opacity: 1;
-    }
-
-    .calendar-btn:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 8px 35px rgba(185, 143, 74, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
-      background: linear-gradient(135deg, #e8d5a8 0%, #c4a07a 100%);
-    }
-
-    .calendar-btn:active {
-      transform: translateY(0) scale(0.98);
-    }
-
-    .calendar-btn .icon {
-      font-size: 20px;
-      line-height: 1;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
-    }
-
-    .calendar-btn .text {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-    }
-
-    .calendar-btn .badge {
-      display: inline-block;
-      padding: 2px 10px;
-      background: rgba(46, 59, 58, 0.15);
-      border-radius: 30px;
-      font-size: 9px;
-      letter-spacing: 0.1em;
-      color: #2E3B3A;
-      margin-left: 4px;
-    }
-
-    /* Animation d'apparition */
-    @keyframes calendarAppear {
-      0% {
-        opacity: 0;
-        transform: translateY(20px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .calendar-btn.show {
-      animation: calendarAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    /* Effet de particules autour du bouton */
-    @keyframes ringPulse {
-      0% { transform: scale(1); opacity: 0.6; }
-      100% { transform: scale(1.3); opacity: 0; }
-    }
-
-    .calendar-btn .ring {
-      position: absolute;
-      inset: -4px;
-      border: 2px solid rgba(185, 143, 74, 0.3);
-      border-radius: 60px;
-      animation: ringPulse 2s ease-out infinite;
-      pointer-events: none;
-    }
-
-    .calendar-btn .ring:nth-child(2) {
-      animation-delay: 0.6s;
-    }
-
-    /* Version responsive */
-    @media (max-width: 480px) {
-      .calendar-btn {
-        padding: 10px 20px;
-        font-size: 11px;
-        gap: 8px;
-      }
-      .calendar-btn .icon {
-        font-size: 16px;
-      }
-      .calendar-btn .text {
-        font-size: 10px;
-      }
-    }
-
-    /* ========== STYLES POUR LE VERSET CORANIQUE ========== */
-    .verse-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 15px;
-      width: 100%;
-      max-width: 100%;
-      text-align: center;
-      direction: rtl;
-    }
-
-    .verse-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(16px, 3.5vw, 22px);
-      line-height: 2.2;
-      color: #FBF6ED;
-      text-shadow: 0 2px 15px rgba(5, 25, 30, 0.8);
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 0 10px;
-      word-wrap: break-word;
-      word-break: break-word;
-      white-space: normal;
-    }
-
-    .verse-text .highlight {
-      color: #D9BE8C;
-      font-weight: 600;
-    }
-
-    .verse-reference {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(12px, 2vw, 16px);
-      color: #D9BE8C;
-      margin-top: 12px;
-      letter-spacing: 0.1em;
-      opacity: 0.8;
-    }
-
-    .verse-line {
-      display: block;
-      width: 100%;
-      max-width: 500px;
-      margin: 4px auto;
-      padding: 0 5px;
-    }
-
-    /* Séparation entre les versets */
-    .verse-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #D9BE8C, transparent);
-      margin: 12px auto;
-      opacity: 0.5;
-    }
-
-    /* Version mobile améliorée */
-    @media (max-width: 480px) {
-      .verse-text {
-        font-size: 15px;
-        line-height: 2.4;
-        padding: 0 5px;
-      }
-      .verse-container {
-        padding: 15px 10px;
-      }
-      .verse-line {
-        padding: 0 2px;
-      }
-      .verse-reference {
-        font-size: 11px;
-      }
+    @media (max-width:480px) {
+      .map-container iframe { height:200px; }
+      .video-overlay .verse-text { font-size:14px; line-height:2; }
     }
   </style>
 </head>
@@ -595,178 +281,110 @@
     <div class="phone">
       <div class="screen" id="screen">
 
-        <video class="video-bg" id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="img_1.png">
+        <!-- ========== VIDEO 100% ========== -->
+        <video class="video-bg" id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto">
           <source src="hhh.mp4" type="video/mp4">
         </video>
-        <!-- Page 1 : Coucher de soleil -->
-        <div class="scene-bg hidden" id="bg0">
-          <img src="img_1.png" alt="Coucher de soleil"/>
-          <div class="overlay"></div>
-        </div>
 
-        <!-- Page 2 : Fleurs -->
-        <div class="scene-bg hidden" id="bg1">
-          <img src="img_1.png" alt="Fleurs"/>
-          <div class="overlay"></div>
-        </div>
-        <div class="scene-bg hidden" id="bg2">
-          <img src="img_1.png" alt="Fleurs"/>
-          <div class="overlay"></div>
-        </div>
-
-        <!-- Page 3 : Ciel étoilé -->
-        <div class="scene-bg hidden" id="bg3">
-          <img src="img_2.png" alt="Ciel étoilé"/>
-          <div class="overlay"></div>
-        </div>
-
-        <!-- Page 4 : Woutia -->
-        <div class="scene-bg hidden" id="bg4">
-          <img src="img_3.png" alt="Woutia"/>
-          <div class="overlay"></div>
-        </div>
-
-        <!-- Page 5 : Maps Kobet Ennhas -->
-        <div class="scene-bg hidden" id="bg5">
-          <img src="img_4.png" alt="Carte"/>
-          <div class="overlay"></div>
-        </div>
-        <div class="scene-bg hidden" id="bg6">
-          <img src="img_4.png" alt="Carte"/>
-          <div class="overlay"></div>
-        </div>
-
-        <!-- ========== CONTENU DES PAGES ========== -->
-
-        <!-- Page 0 : Bienvenue avec le verset coranique -->
-        <div class="names-tag" id="cap0">
-          <div class="verse-container">
-            <p class="verse-text">
-              <span class="verse-line" style="font-size: clamp(18px, 4vw, 26px); color: #D9BE8C; margin-bottom: 10px;">
-                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-              </span>
-              <span class="verse-line" style="margin-top: 8px;">
-                وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ
-                <span class="highlight">أَزْوَاجًا</span>
-              </span>
-              <span class="verse-line">
-                لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم
-                <span class="highlight">مَّوَدَّةً وَرَحْمَةً</span>
-              </span>
-              <span class="verse-line" style="color: #D9BE8C; font-style: italic;">
-                إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
-              </span>
-            </p>
-            <div class="verse-divider"></div>
-            <span class="verse-reference">✦ سورة الروم - الآية 21 ✦</span>
-          </div>
+        <!-- ========== OVERLAY ========== -->
+        <div class="video-overlay" id="cap0">
+          <p class="verse-text">
+            <span class="verse-line" style="font-size:clamp(20px,5vw,32px);color:#D9BE8C;margin-bottom:10px;font-weight:600;">
+              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </span>
+            <span class="verse-line">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ <span class="highlight">أَزْوَاجًا</span></span>
+            <span class="verse-line">لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم <span class="highlight">مَّوَدَّةً وَرَحْمَةً</span></span>
+            <span class="verse-line" style="color:#D9BE8C;font-style:italic;font-weight:500;">إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</span>
+          </p>
+          <div class="verse-divider"></div>
+          <span class="verse-reference">✦ سورة الروم - الآية 21 ✦</span>
           <div class="rule"></div>
         </div>
 
-        <!-- Page 1 : Invitation -->
+        <!-- ========== BACKGROUNDS ========== -->
+        <div class="scene-bg hidden" id="bg0"><img src="img_1.png"/><div class="overlay"></div></div>
+        <div class="scene-bg hidden" id="bg1"><img src="img_1.png"/><div class="overlay"></div></div>
+        <div class="scene-bg hidden" id="bg2"><img src="img_1.png"/><div class="overlay"></div></div>
+        <div class="scene-bg hidden" id="bg3"><img src="img_2.png"/><div class="overlay"></div></div>
+        <div class="scene-bg hidden" id="bg4"><img src="img_3.png"/><div class="overlay"></div></div>
+        <div class="scene-bg hidden" id="bg5"><img src="img_4.png"/><div class="overlay"></div></div>
+        <div class="scene-bg hidden" id="bg6"><img src="img_4.png"/><div class="overlay"></div></div>
+
+        <!-- ========== PAGES ========== -->
         <div class="card-panel" id="cap1" style="opacity:0;">
           <div class="eyebrow-sm">دعوة زفاف</div>
           <p class="msg">
-            بسم الله الرحمن الرحيم
-            <br><br>
-            بكل حب وسعادة،
-            <br>
-            تتشرف عائلة <strong></strong> و <strong>عادل لملوم</strong>
-            <br>
-            بدعوتكم لحضور حفل زفاف ابنيهما
-            <br><br>
-            <span class="names">سناء و عـارـف</span>
-            <br><br>
+            بسم الله الرحمن الرحيم<br><br>
+            بكل حب وسعادة،<br>
+            تتشرف عائلة <strong></strong> و <strong>عادل لملوم</strong><br>
+            بدعوتكم لحضور حفل زفاف ابنيهما<br><br>
+            <span class="names">سناء و عـارـف</span><br><br>
             وذلك بمشيئة الله تعالى يوم
-          <div class="date-gift-container" onclick="revealDateGift(event, this)">
+          </p>
+          <div class="date-gift-container" onclick="revealDateGift(event,this)">
             <div class="date-gift-box">
               <span class="gift-icon">💫</span>
               <span class="gift-hint">✦ تاريخ الزفاف ✦</span>
-              <span class="revealed-date">
-                6 ديسمبر 2026
-                <div class="calendar-wrapper">
-                  <button class="calendar-btn" id="calendarBtn" style="display:none;" onclick="addToCalendar(event)">
-                    <span class="ring"></span>
-                    <span class="ring"></span>
-                    <span class="icon">📅</span>
-                    <span class="text">Ajouter au calendrier</span>
-                    <span class="badge">✦</span>
-                  </button>
-                </div>
-              </span>
+              <span class="revealed-date">6 ديسمبر 2026</span>
             </div>
           </div>
-          <br>
-          على الساعة <strong>16:30</strong>
-          <br><br>
-          ببلدية القصبة
+          <p class="msg">
+            <br>على الساعة <strong>16:30</strong><br><br>
+            ببلدية القصبة
           </p>
         </div>
 
-        <!-- Page 2 : Monogramme -->
         <div class="card-panel" id="cap2" style="opacity:0;">
           <div class="monogram-card">
             <svg viewBox="0 0 100 100">
               <path d="M20,70 Q20,20 50,20 Q80,20 80,70" fill="none" stroke="#FBF6ED" stroke-width="2.4"/>
               <path d="M38,20 Q42,10 50,10 Q58,10 62,20" fill="none" stroke="#FBF6ED" stroke-width="1.4" opacity="0.85"/>
-              <text x="50" y="52" text-anchor="middle" font-family="Cinzel, serif" font-size="26" fill="#FBF6ED">س</text>
-              <text x="50" y="76" text-anchor="middle" font-family="Cinzel, serif" font-size="26" fill="#FBF6ED">ع</text>
+              <text x="50" y="52" text-anchor="middle" font-family="Cinzel,serif" font-size="26" fill="#FBF6ED">س</text>
+              <text x="50" y="76" text-anchor="middle" font-family="Cinzel,serif" font-size="26" fill="#FBF6ED">ع</text>
               <path d="M28,60 Q39,54 50,60 T72,60" fill="none" stroke="#D9BE8C" stroke-width="1.4"/>
             </svg>
           </div>
         </div>
 
-        <!-- Page 3 : Lieu -->
         <div class="card-panel" id="cap3" style="opacity:0;">
           <div class="monogram-card">
             <div class="eyebrow-sm">المكان</div>
             <div class="title">بلدية القصبة</div>
             <div class="rule"></div>
-            <div class="sub">
-              يسعدنا حضوركم ومشاركتنا فرحتنا
-              <br><br>
-              📍 بلدية القصبة
-            </div>
+            <div class="sub">يسعدنا حضوركم ومشاركتنا فرحتنا<br><br>📍 بلدية القصبة</div>
             <div class="map-container">
-              <iframe src="https://www.google.com/maps?q=36.7988582,10.1657737&output=embed" width="400" height="300" style="border:0;border-radius:15px;" allowfullscreen="" loading="lazy"></iframe>
+              <iframe src="https://www.google.com/maps?q=36.7988582,10.1657737&output=embed" allowfullscreen loading="lazy"></iframe>
             </div>
           </div>
         </div>
 
-        <!-- Page 4 : Monogramme -->
         <div class="card-panel" id="cap4" style="opacity:0;">
           <div class="monogram-card">
             <svg viewBox="0 0 100 100">
               <path d="M20,70 Q20,20 50,20 Q80,20 80,70" fill="none" stroke="#FBF6ED" stroke-width="2.4"/>
               <path d="M38,20 Q42,10 50,10 Q58,10 62,20" fill="none" stroke="#FBF6ED" stroke-width="1.4" opacity="0.85"/>
-              <text x="50" y="52" text-anchor="middle" font-family="Cinzel, serif" font-size="26" fill="#FBF6ED">س</text>
-              <text x="50" y="76" text-anchor="middle" font-family="Cinzel, serif" font-size="26" fill="#FBF6ED">ع</text>
+              <text x="50" y="52" text-anchor="middle" font-family="Cinzel,serif" font-size="26" fill="#FBF6ED">س</text>
+              <text x="50" y="76" text-anchor="middle" font-family="Cinzel,serif" font-size="26" fill="#FBF6ED">ع</text>
               <path d="M28,60 Q39,54 50,60 T72,60" fill="none" stroke="#D9BE8C" stroke-width="1.4"/>
             </svg>
           </div>
         </div>
 
-        <!-- Page 5 : Lalla / Henni -->
         <div class="card-panel" id="cap5" style="opacity:0;">
           <div class="monogram-card">
             <div class="eyebrow-sm">ليلة الحناء</div>
             <div class="title">العشاء &amp; وطية</div>
             <div class="rule"></div>
             <div class="sub">
-              ندعوكم لمشاركتنا ليلة من أجمل التقاليد التونسية
-              <br>
-              ليلة الفرح والحناء قبل الزفاف
-              <br><br>
-              في منزلنا في حدائق المنزه
-              <br>
-              يوم
-              <br>
-              <strong dir="rtl"><bdi>&nbsp; &nbsp; 5 </bdi>ديسمبر</strong>
+              ندعوكم لمشاركتنا ليلة من أجمل التقاليد التونسية<br>
+              ليلة الفرح والحناء قبل الزفاف<br><br>
+              في منزلنا في حدائق المنزه<br>
+              يوم<br>
+              <strong dir="rtl">5 ديسمبر</strong>
             </div>
           </div>
         </div>
 
-        <!-- Page 6 : Remerciements -->
         <div class="card-panel" id="cap6" style="opacity:0;">
           <div class="monogram-card">
             <svg viewBox="0 0 100 100">
@@ -777,10 +395,8 @@
             <div class="eyebrow-sm">بكل الشكر والامتنان</div>
             <div class="rule"></div>
             <div class="sub">
-              شكراً لكم من كل قلبنا
-              <br>
-              لتواجدكم معنا في هذه اللحظات الجميلة
-              <br>
+              شكراً لكم من كل قلبنا<br>
+              لتواجدكم معنا في هذه اللحظات الجميلة<br>
               حضوركم هو أجمل هدية
             </div>
           </div>
@@ -802,9 +418,8 @@
     document.getElementById('cap5'),
     document.getElementById('cap6')
   ];
-
   const backgrounds = [
-    null, // page 0 = vidéo
+    null,
     document.getElementById('bg0'),
     document.getElementById('bg1'),
     document.getElementById('bg2'),
@@ -812,95 +427,31 @@
     document.getElementById('bg4'),
     document.getElementById('bg5')
   ];
-
-  // Forcer la lecture de la vidéo sur mobile
   const video = document.getElementById('bgVideo');
-
-  // Fonction pour démarrer la vidéo
-  function startVideo() {
-    video.play().catch(function(error) {
-      console.log("La vidéo ne peut pas être lue automatiquement:", error);
-      // Réessayer au clic
-      document.addEventListener('click', function playVideo() {
-        video.play();
-        document.removeEventListener('click', playVideo);
-      }, { once: true });
-    });
-  }
-
-  // Démarrer la vidéo au chargement
-  document.addEventListener('DOMContentLoaded', startVideo);
-
-  // Redémarrer si la vidéo s'arrête
-  video.addEventListener('pause', function() {
-    if (video.currentTime > 0 && !video.paused) {
-      // Ne rien faire
-    }
-  });
 
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
-  // Fonction pour révéler la date et afficher le bouton calendrier
   function revealDateGift(event, element) {
-    if (event) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
-
+    if(event){ event.stopPropagation(); event.preventDefault(); }
     const box = element.querySelector('.date-gift-box');
-    if (box.classList.contains('revealed')) return;
-
+    if(box.classList.contains('revealed')) return;
     box.classList.add('opening');
-
-    const emojis = ['✨', '✧', '✦', '💫', '🌟'];
-    for (let i = 0; i < 8; i++) {
-      setTimeout(() => {
-        const particle = document.createElement('span');
-        particle.className = 'gold-particle';
-        particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        const x = Math.random() * 80 + 10;
-        const y = Math.random() * 80 + 10;
-        particle.style.left = x + '%';
-        particle.style.top = y + '%';
-        particle.style.setProperty('--tx', (Math.random() * 60 - 30) + 'px');
-        particle.style.setProperty('--ty', (Math.random() * -60 - 20) + 'px');
-        particle.style.fontSize = (Math.random() * 12 + 10) + 'px';
-        box.appendChild(particle);
-        setTimeout(() => particle.remove(), 800);
-      }, i * 50);
+    const emojis = ['✨','✧','✦','💫','🌟'];
+    for(let i=0;i<8;i++){
+      setTimeout(()=>{
+        const p = document.createElement('span');
+        p.className = 'gold-particle';
+        p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        p.style.left = (Math.random()*80+10)+'%';
+        p.style.top = (Math.random()*80+10)+'%';
+        p.style.setProperty('--tx', (Math.random()*60-30)+'px');
+        p.style.setProperty('--ty', (Math.random()*-60-20)+'px');
+        p.style.fontSize = (Math.random()*12+10)+'px';
+        box.appendChild(p);
+        setTimeout(()=>p.remove(), 800);
+      }, i*50);
     }
-
-    setTimeout(() => {
-      box.classList.remove('opening');
-      box.classList.add('revealed');
-
-      // Afficher le bouton calendrier avec animation
-      const calendarBtn = box.querySelector('.calendar-btn');
-      if (calendarBtn) {
-        calendarBtn.style.display = 'inline-flex';
-        void calendarBtn.offsetWidth;
-        calendarBtn.classList.add('show');
-      }
-    }, 600);
-  }
-
-  // Fonction pour ajouter au calendrier
-  function addToCalendar(event) {
-    if (event) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
-
-    const eventTitle = "Mariage de Sana & Aref";
-    const eventLocation = "بلدية القصبة, Tunis";
-    const eventDescription = "Mariage de Sana et Aref - 6 Décembre 2026 à 16:30";
-
-    const startDate = "20261206T163000";
-    const endDate = "20261206T200000";
-
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(eventDescription)}&location=${encodeURIComponent(eventLocation)}`;
-
-    window.open(googleCalendarUrl, '_blank');
+    setTimeout(()=>{ box.classList.remove('opening'); box.classList.add('revealed'); }, 600);
   }
 
   function onScroll(){
@@ -910,25 +461,16 @@
     const scrolled = clamp(-rect.top, 0, total);
     const progress = total > 0 ? scrolled / total : 0;
     const activeFloat = progress * 6;
-
-    // Vidéo s'estompe au scroll
     const videoOpacity = clamp(1 - activeFloat * 1.2, 0, 1);
     video.style.opacity = videoOpacity;
-
-    // Pages
     panels.forEach((p, i) => {
       const d = 1 - Math.abs(activeFloat - i);
       const op = clamp(d, 0, 1);
       p.style.opacity = op;
       p.style.transform = i >= 1 ? `translateY(${(1 - op) * 16}px)` : '';
       p.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
-
-      if (backgrounds[i]) {
-        if (op > 0.3) {
-          backgrounds[i].className = 'scene-bg visible';
-        } else {
-          backgrounds[i].className = 'scene-bg hidden';
-        }
+      if(backgrounds[i]){
+        backgrounds[i].className = op > 0.3 ? 'scene-bg visible' : 'scene-bg hidden';
       }
     });
   }
@@ -937,29 +479,22 @@
   window.addEventListener('resize', onScroll);
   onScroll();
 
+  // Démarrer vidéo
+  video.play().catch(()=>{});
+
   // Musique
   const bgMusic = document.getElementById('bgMusic');
   let musicPlaying = false;
-
   function startMusic(){
     bgMusic.volume = 0.6;
-    bgMusic.play().then(() => {
-      musicPlaying = true;
-    }).catch(() => {
-      musicPlaying = false;
-    });
+    bgMusic.play().then(()=>{ musicPlaying=true; }).catch(()=>{ musicPlaying=false; });
   }
-
   window.addEventListener('load', startMusic);
-
   window.addEventListener('click', (e) => {
-    if (e.target.closest('.date-gift-container')) {
-      return;
-    }
-    if (!musicPlaying) startMusic();
+    if(e.target.closest('.date-gift-container')) return;
+    if(!musicPlaying) startMusic();
   }, { once: true });
-
-  window.addEventListener('touchstart', () => { if (!musicPlaying) startMusic(); }, { once: true });
+  window.addEventListener('touchstart', () => { if(!musicPlaying) startMusic(); }, { once: true });
 </script>
 
 </body>
