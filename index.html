@@ -210,13 +210,17 @@
     @media (max-width: 768px) {
       .video-bg {
         position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        width: auto !important;
+        height: auto !important;
         object-fit: cover !important;
-        z-index: -1 !important; /* Pour être sûr qu'elle reste en arrière-plan */
+        z-index: -1 !important;
       }
+    }
 
       .screen {
         height: 100vh !important;
