@@ -507,21 +507,13 @@
             <span class="names">سناء و عـارـف</span>
             <br><br>
             وذلك بمشيئة الله تعالى يوم
-              <!-- Après la date révélée -->
-            <div class="date-gift-container" onclick="revealDateGift(event, this)">
-                <div class="date-gift-box">
-                    <span class="gift-icon">💫</span>
-                    <span class="gift-hint">✦ تاريخ الزفاف ✦</span>
-                    <span class="revealed-date">
-      6 جويلية 2026
-                        <!-- Bouton calendrier caché jusqu'à révélation -->
-      <button class="calendar-btn" id="calendarBtn" style="display:none;" onclick="addToCalendar(event)">
-        <span class="icon">📅</span>
-        Ajouter au calendrier
-      </button>
-    </span>
-                </div>
+          <div class="date-gift-container" onclick="revealDateGift(event, this)">
+            <div class="date-gift-box">
+              <span class="gift-icon">💫 اضغط هنا</span>
+              <span class="gift-hint">✦ تاريخ الزفاف ✦</span>
+              <span class="revealed-date" dir="rtl"><bdi>6</bdi> ديسمبر 2026</span>
             </div>
+          </div>
             <br>
             على الساعة <strong>16:30</strong>
             <br><br>
@@ -645,102 +637,39 @@
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
   // Fonction pour révéler la date comme un cadeau
   // Fonction pour révéler la date
-  // Fonction pour ajouter au calendrier
-  function addToCalendar(event) {
-      if (event) {
-          event.stopPropagation();
-          event.preventDefault();
-      }
-
-      // Informations de l'événement
-      const eventTitle = "Mariage de Sana & Atef";
-      const eventLocation = "بلدية القصبة, Tunis";
-      const eventDescription = "Mariage de Sana et Atef - 6 Juillet 2026 à 16:30";
-
-      // Date : 6 Juillet 2026 à 16:30
-      // Format Google Calendar : YYYYMMDDTHHMMSS
-      const startDate = "20260706T163000";
-      const endDate = "20260706T200000"; // 3h30 plus tard
-
-      // Créer le lien Google Calendar
-      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(eventDescription)}&location=${encodeURIComponent(eventLocation)}`;
-
-      // Ouvrir dans une nouvelle fenêtre
-      window.open(googleCalendarUrl, '_blank');
-
-      // Option : Ajouter aussi pour Apple Calendar / Outlook
-      // Créer un fichier .ics pour Apple Calendar
-      const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Sana&Atef//Wedding//EN
-BEGIN:VEVENT
-SUMMARY:Mariage de Sana & Atef
-DTSTART:20260706T163000
-DTEND:20260706T200000
-LOCATION:بلدية القصبة, Tunis
-DESCRIPTION:Mariage de Sana et Atef
-END:VEVENT
-END:VCALENDAR`;
-
-      // Stocker pour usage futur si besoin
-      window.icsData = icsContent;
-  }
-
-  // Modifier la fonction revealDateGift pour afficher le bouton calendrier
   function revealDateGift(event, element) {
-      if (event) {
-          event.stopPropagation();
-          event.preventDefault();
-      }
+    // Empêcher la propagation du clic
+    if (event) {
+      event.stopPropagation();
+    }
 
-      const box = element.querySelector('.date-gift-box');
-      if (box.classList.contains('revealed')) return;
+    const box = element.querySelector('.date-gift-box');
+    if (box.classList.contains('revealed')) return;
 
-      box.classList.add('opening');
+    box.classList.add('opening');
 
-      const emojis = ['✨', '✧', '✦', '💫', '🌟'];
-      for (let i = 0; i < 8; i++) {
-          setTimeout(() => {
-              const particle = document.createElement('span');
-              particle.className = 'gold-particle';
-              particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-              const x = Math.random() * 80 + 10;
-              const y = Math.random() * 80 + 10;
-              particle.style.left = x + '%';
-              particle.style.top = y + '%';
-              particle.style.setProperty('--tx', (Math.random() * 60 - 30) + 'px');
-              particle.style.setProperty('--ty', (Math.random() * -60 - 20) + 'px');
-              particle.style.fontSize = (Math.random() * 12 + 10) + 'px';
-              box.appendChild(particle);
-              setTimeout(() => particle.remove(), 800);
-          }, i * 50);
-      }
-
+    const emojis = ['✨', '✧', '✦', '💫', '🌟'];
+    for (let i = 0; i < 8; i++) {
       setTimeout(() => {
-          box.classList.remove('opening');
-          box.classList.add('revealed');
+        const particle = document.createElement('span');
+        particle.className = 'gold-particle';
+        particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        const x = Math.random() * 80 + 10;
+        const y = Math.random() * 80 + 10;
+        particle.style.left = x + '%';
+        particle.style.top = y + '%';
+        particle.style.setProperty('--tx', (Math.random() * 60 - 30) + 'px');
+        particle.style.setProperty('--ty', (Math.random() * -60 - 20) + 'px');
+        particle.style.fontSize = (Math.random() * 12 + 10) + 'px';
+        box.appendChild(particle);
+        setTimeout(() => particle.remove(), 800);
+      }, i * 50);
+    }
 
-          // Afficher le bouton calendrier après révélation
-          const calendarBtn = box.querySelector('.calendar-btn');
-          if (calendarBtn) {
-              calendarBtn.style.display = 'inline-block';
-              calendarBtn.classList.add('show');
-          }
-      }, 600);
-  }
-
-  // Fonction pour ajouter au calendrier Apple/Outlook (optionnel)
-  function downloadICS() {
-      if (window.icsData) {
-          const blob = new Blob([window.icsData], { type: 'text/calendar;charset=utf-8' });
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(blob);
-          link.download = 'mariage_sana_atef.ics';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(link.href);
-      }
+    setTimeout(() => {
+      box.classList.remove('opening');
+      box.classList.add('revealed');
+    }, 600);
   }
 
   function onScroll(){
