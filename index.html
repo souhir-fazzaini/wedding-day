@@ -25,7 +25,40 @@
       color:var(--ink);
       overflow-x:hidden;
     }
+    .map-container1 {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
 
+    .map-container1 iframe {
+      width: 100%;
+      height: 220px;
+      display: block;
+      border: none;
+    }
+
+    .map-container1 .map-link {
+      display: block;
+      text-align: center;
+      padding: 10px 0;
+      background: #f8f4ec;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #B98F4A;
+      text-decoration: none;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+      transition: background 0.3s;
+    }
+
+    .map-containe1 .map-link:hover {
+      background: #efe8db;
+    }
     .top{
       padding:44px 20px 10px;
       text-align:center;
@@ -38,95 +71,196 @@
       text-transform:uppercase;
       margin-bottom:10px;
     }
-    /* ========== STYLES POUR LA DATE CACHÉE ========== */
+    /* ===== STYLES POUR LE CERCLE DATE GIFT ===== */
     .date-gift-container {
-      display: inline-block;
-      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
-      margin: 10px 0;
-      pointer-events: auto;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      -webkit-tap-highlight-color: transparent;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .date-gift-container:active {
+      transform: scale(0.92);
     }
 
     .date-gift-box {
-      display: inline-block;
-      padding: 16px 35px;
-      background: linear-gradient(145deg, #f5e6d3, #e8d5c0);
-      border-radius: 50px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 2px 0 rgba(255,255,255,0.3);
-      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
-      border: 2px solid #D9BE8C;
-      min-width: 180px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, #f8f0e0, #dccdb6);
+      box-shadow:
+              0 15px 45px rgba(80, 60, 40, 0.25),
+              0 4px 15px rgba(0, 0, 0, 0.08),
+              inset 0 -6px 20px rgba(120, 90, 60, 0.15),
+              inset 0 4px 20px rgba(255, 245, 220, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 25px 20px;
+      transition: all 0.4s ease;
+      border: 2px solid rgba(185, 143, 74, 0.25);
+      overflow: visible;
     }
 
-    .date-gift-box .gift-icon {
-      font-size: 32px;
-      display: block;
-      margin-bottom: 2px;
-      transition: transform 0.3s ease;
+    /* Anneau décoratif doré */
+    .date-gift-box::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b98f4a, #d9be8c, #b98f4a);
+      opacity: 0.3;
+      z-index: -1;
+      filter: blur(4px);
     }
 
-    .date-gift-box .gift-hint {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 14px;
-      color: #2E3B3A;
+    /* Cercle intérieur brillant */
+    .date-gift-box::after {
+      content: '';
+      position: absolute;
+      top: 8%;
+      left: 15%;
+      width: 35%;
+      height: 20%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255, 248, 230, 0.6) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .gift-icon {
+      font-size: 38px;
+      line-height: 1;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 2px 8px rgba(185, 143, 74, 0.3));
+      position: relative;
+      z-index: 2;
+      transition: transform 0.4s ease;
+    }
+
+    .gift-hint {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: #b98f4a;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 4px;
+      background: rgba(255, 248, 240, 0.4);
+      padding: 2px 12px;
+      border-radius: 20px;
+    }
+
+    .revealed-date {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 500;
       letter-spacing: 0.08em;
-      font-style: italic;
-      opacity: 0.7;
-      display: block;
+      color: #2e3b3a;
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 248, 240, 0.5);
+      padding: 4px 16px;
+      border-radius: 30px;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(185, 143, 74, 0.15);
+      margin-top: 2px;
+      display: none !important; /* Caché par défaut */
     }
 
     /* Quand la date est révélée */
-    .date-gift-box.revealed {
-      background: linear-gradient(145deg, #f5e6d3, #e8d5c0);
-      border-color: #B98F4A;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      padding: 16px 35px;
-    }
-
-    .date-gift-box.revealed .gift-icon {
-      display: none;
-    }
-
-    .date-gift-box.revealed .gift-hint {
-      display: none;
-    }
-
     .date-gift-box.revealed .revealed-date {
       display: block !important;
     }
 
-    .revealed-date {
-      display: none !important;
-      font-family: 'Cinzel', serif;
-      font-size: 24px;
-      font-weight: 600;
-      color: #B98F4A;
-      letter-spacing: 0.1em;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+    /* Effet de lueur au survol */
+    .date-gift-container:hover .date-gift-box {
+      box-shadow:
+              0 20px 55px rgba(80, 60, 40, 0.3),
+              0 0 40px rgba(185, 143, 74, 0.1),
+              inset 0 -6px 20px rgba(120, 90, 60, 0.15),
+              inset 0 4px 20px rgba(255, 245, 220, 0.5);
+      border-color: rgba(185, 143, 74, 0.5);
+      transform: scale(1.02);
     }
 
-    /* Effet hover */
-    .date-gift-box:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    }
-
-    .date-gift-box:hover .gift-icon {
+    .date-gift-container:hover .gift-icon {
       transform: scale(1.1) rotate(-5deg);
     }
 
-    /* Animation d'ouverture */
+    /* ===== ANIMATION D'OUVERTURE ===== */
     @keyframes dateReveal {
-      0% { transform: scale(1); }
-      30% { transform: scale(1.1); }
-      50% { transform: scale(0.95); }
-      70% { transform: scale(1.03); }
-      100% { transform: scale(1); }
+      0% {
+        transform: scale(1);
+        box-shadow: 0 15px 45px rgba(80, 60, 40, 0.25);
+      }
+      20% {
+        transform: scale(1.15);
+        box-shadow: 0 25px 60px rgba(185, 143, 74, 0.3);
+      }
+      40% {
+        transform: scale(0.92);
+      }
+      60% {
+        transform: scale(1.05);
+        box-shadow: 0 20px 50px rgba(185, 143, 74, 0.2);
+      }
+      80% {
+        transform: scale(0.98);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 15px 45px rgba(80, 60, 40, 0.25);
+      }
     }
 
+    @keyframes iconPop {
+      0% { transform: scale(1) rotate(0deg); }
+      30% { transform: scale(1.4) rotate(-15deg); }
+      60% { transform: scale(0.8) rotate(5deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes textReveal {
+      0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(10px);
+      }
+      40% {
+        opacity: 0;
+        transform: scale(0.5) translateY(10px);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.2) translateY(0);
+      }
+      80% {
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Classes d'animation */
     .date-gift-box.opening {
-      animation: dateReveal 0.6s ease;
+      animation: dateReveal 0.8s ease forwards;
+    }
+
+    .date-gift-box.opening .gift-icon {
+      animation: iconPop 0.8s ease forwards;
+    }
+
+    .date-gift-box.opening .revealed-date {
+      animation: textReveal 0.9s ease forwards;
     }
 
     /* Effet de brillance */
@@ -134,28 +268,37 @@
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 50px;
+      border-radius: 50%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
       transform: translateX(-100%);
       transition: transform 0.6s;
+      pointer-events: none;
     }
 
     .date-gift-box:hover::before {
       transform: translateX(100%);
     }
 
-    /* Petites particules d'or */
-    @keyframes goldParticles {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+    /* Adaptation responsive */
+    @media (max-width: 480px) {
+      .date-gift-box {
+        width: 180px;
+        height: 180px;
+        padding: 20px 15px;
+      }
+      .gift-icon {
+        font-size: 30px;
+      }
+      .gift-hint {
+        font-size: 8px;
+        letter-spacing: 0.2em;
+      }
+      .revealed-date {
+        font-size: 18px;
+        padding: 2px 12px;
+      }
     }
 
-    .gold-particle {
-      position: absolute;
-      font-size: 14px;
-      pointer-events: none;
-      animation: goldParticles 0.8s ease forwards;
-    }
 
     .heading{
       font-family:'Cinzel', serif;
@@ -231,44 +374,14 @@
         width: 100vw !important;
         height: auto !important;
         object-fit: contain !important;
-        transform: translate(-50%, -50%) scaleY(2.8) !important;
+        transform: translate(-50%, -50%) scaleY(1.3) !important; /* valeur de secours */
         z-index: 0 !important;
         display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
       }
-
-      .screen {
-        height: 100vh !important;
-        width: 100% !important;
-        overflow: hidden !important;
-      }
-
-      .phone {
-        height: 100vh !important;
-        width: 100% !important;
-      }
-
-      .phone-sticky {
-        height: 100vh !important;
-        width: 100vw !important;
-        overflow: hidden !important;
-      }
+      .screen { height: 100vh !important; width: 100% !important; overflow: hidden !important; }
+      .phone { height: 100vh !important; width: 100% !important; }
+      .phone-sticky { height: 100vh !important; width: 100vw !important; overflow: hidden !important; }
     }
-
-    @media (max-width: 480px) {
-      .video-bg {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        width: 100vw !important;
-        height: auto !important;
-        object-fit: contain !important;
-        transform: translate(-50%, -50%) scaleY(1.5) !important;
-        z-index: 0 !important;
-      }
-    }
-
 
     /* ========== BACKGROUND IMAGES POUR CHAQUE PAGE ========== */
     .scene-bg {
@@ -696,7 +809,7 @@
             <br><br>
             بكل حب وسعادة،
             <br>
-            تتشرف عائلة <strong></strong> و <strong>عادل لملوم</strong>
+          <br>  تتشرف عائلة  <br><strong> التومي الخزري <br></strong> و <strong>عادل لملوم</strong>
             <br>
             بدعوتكم لحضور حفل زفاف ابنيهما
             <br><br>
@@ -707,21 +820,11 @@
             <div class="date-gift-box">
               <span class="gift-icon">💫</span>
               <span class="gift-hint">✦ تاريخ الزفاف ✦</span>
-              <span class="revealed-date">
-                6 ديسمبر 2026
-                <div class="calendar-wrapper">
-                  <button class="calendar-btn" id="calendarBtn" style="display:none;" onclick="addToCalendar(event)">
-                    <span class="ring"></span>
-                    <span class="ring"></span>
-                    <span class="icon">📅</span>
-                    <span class="text">Ajouter au calendrier</span>
-                    <span class="badge">✦</span>
-                  </button>
-                </div>
-              </span>
+              <span class="revealed-date" dir="rtl">
+      6 ديسمبر 2026
+    </span>
             </div>
-          </div>
-          <br>
+          </div>          <br>
           على الساعة <strong>16:30</strong>
           <br><br>
           ببلدية القصبة
@@ -786,7 +889,16 @@
               <br>
               يوم
               <br>
-              <strong dir="rtl"><bdi>&nbsp; &nbsp; 5 </bdi>ديسمبر</strong>
+              <strong dir="rtl"><bdi>&nbsp; &nbsp; 4 </bdi>ديسمبر</strong>
+              <br>
+              <div class="map-container1">
+                <iframe
+                        src="https://www.google.com/maps?q=V46J%2BQH7+Avenue+Des+Jasmins+Tunis+Tunisia&output=embed"
+                        width="400" height="300" style="border:0;border-radius:15px;"
+                        loading="lazy">
+                </iframe>
+
+              </div>
             </div>
           </div>
         </div>
@@ -857,51 +969,36 @@
       // Ne rien faire
     }
   });
-
+  // Musique
+  const bgMusic = document.getElementById('bgMusic');
+  let musicPlaying = false;
+  function startMusic(){
+    bgMusic.volume = 0.6;
+    bgMusic.play().then(()=>{ musicPlaying=true; }).catch(()=>{ musicPlaying=false; });
+  }
+  window.addEventListener('load', startMusic);
+  window.addEventListener('click', (e) => {
+    if(e.target.closest('.date-gift-container')) return;
+    if(!musicPlaying) startMusic();
+  }, { once: true });
+  window.addEventListener('touchstart', () => { if(!musicPlaying) startMusic(); }, { once: true });
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
   function revealDateGift(event, element) {
-    if (event) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
-
     const box = element.querySelector('.date-gift-box');
+
+    // Évite de relancer l'animation si déjà ouverte
     if (box.classList.contains('revealed')) return;
 
+    // Ajoute la classe d'animation
     box.classList.add('opening');
 
-    const emojis = ['✨', '✧', '✦', '💫', '🌟'];
-    for (let i = 0; i < 8; i++) {
-      setTimeout(() => {
-        const particle = document.createElement('span');
-        particle.className = 'gold-particle';
-        particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        const x = Math.random() * 80 + 10;
-        const y = Math.random() * 80 + 10;
-        particle.style.left = x + '%';
-        particle.style.top = y + '%';
-        particle.style.setProperty('--tx', (Math.random() * 60 - 30) + 'px');
-        particle.style.setProperty('--ty', (Math.random() * -60 - 20) + 'px');
-        particle.style.fontSize = (Math.random() * 12 + 10) + 'px';
-        box.appendChild(particle);
-        setTimeout(() => particle.remove(), 800);
-      }, i * 50);
-    }
-
+    // Supprime la classe d'animation après la fin
     setTimeout(() => {
       box.classList.remove('opening');
       box.classList.add('revealed');
-
-      const calendarBtn = box.querySelector('.calendar-btn');
-      if (calendarBtn) {
-        calendarBtn.style.display = 'inline-flex';
-        void calendarBtn.offsetWidth;
-        calendarBtn.classList.add('show');
-      }
-    }, 600);
+    }, 900); // correspond à la durée de l'animation
   }
-
   function addToCalendar(event) {
     if (event) {
       event.stopPropagation();
@@ -951,6 +1048,38 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   onScroll();
+  function adjustVideoScale() {
+    if (window.innerWidth > 768) return;
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const videoRatio = video.videoWidth / video.videoHeight;
+
+    if (!videoRatio) {
+      // métadonnées pas encore prêtes, on réessaie bientôt
+      setTimeout(adjustVideoScale, 100);
+      return;
+    }
+
+    const displayedHeight = vw / videoRatio;
+    let scaleY = vh / displayedHeight;
+    scaleY = Math.min(Math.max(scaleY, 1), 1.5);
+
+    video.style.transform = `translate(-50%, -50%) scaleY(${scaleY})`;
+    if (blurVideo) blurVideo.style.transform = `scale(1.1)`; // reste stable
+  }
+
+  video.addEventListener('loadedmetadata', adjustVideoScale);
+  video.addEventListener('loadeddata', adjustVideoScale);
+  video.addEventListener('canplay', adjustVideoScale);
+  window.addEventListener('resize', adjustVideoScale);
+  window.addEventListener('orientationchange', adjustVideoScale);
+  adjustVideoScale(); // tentative immédiate + retries automatiques via setTimeout si besoin
+
+  video.addEventListener('loadedmetadata', adjustVideoScale);
+  window.addEventListener('resize', adjustVideoScale);
+  window.addEventListener('orientationchange', adjustVideoScale);
+  adjustVideoScale();
 </script>
 
 </body>
