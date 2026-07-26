@@ -201,22 +201,27 @@
       background:#cfe7ef;
     }
 
-    /* ========== VIDEO BACKGROUND ========== */
-    /* ========== VIDEO BACKGROUND ========== */
-    /* Forcer la vidéo à s'afficher sur mobile */
     /* ========== CORRECTION VIDÉO MOBILE ========== */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+    }
 
-    /* Version 1 : La vidéo prend toute la largeur */
+    /* Version mobile - correction complète */
     @media (max-width: 768px) {
       .video-bg {
-        width: 100% !important;
-        height: auto !important;
-        min-height: 100% !important;
-        object-fit: cover !important;
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
-        right: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: cover !important;
+        z-index: 0 !important;
       }
 
       .screen {
@@ -236,40 +241,7 @@
       }
     }
 
-    /* Version 2 : Pour forcer le plein écran */
-    @media (max-width: 480px) {
-      .video-bg {
-        width: 100% !important;
-        height: 100vh !important;
-        min-width: 100% !important;
-        min-height: 100vh !important;
-        object-fit: cover !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-      }
-    }
-
-    .screen {
-        height: 100vh !important;
-        width: 100% !important;
-        overflow: hidden !important;
-      }
-
-      .phone {
-        height: 100vh !important;
-        width: 100% !important;
-      }
-
-      .phone-sticky {
-        height: 100vh !important;
-        width: 100% !important;
-      }
-    }
-
-    /* Pour les très petits écrans, on garde la même chose */
+    /* Pour les très petits écrans */
     @media (max-width: 480px) {
       .video-bg {
         position: fixed !important;
@@ -278,11 +250,9 @@
         width: 100vw !important;
         height: 100vh !important;
         object-fit: cover !important;
-        z-index: -1 !important;
+        z-index: 0 !important;
       }
     }
-
-
 
     /* ========== BACKGROUND IMAGES POUR CHAQUE PAGE ========== */
     .scene-bg {
@@ -449,7 +419,6 @@
       overflow: hidden;
     }
 
-    /* Effet de brillance au survol */
     .calendar-btn::before {
       content: '';
       position: absolute;
@@ -500,7 +469,6 @@
       margin-left: 4px;
     }
 
-    /* Animation d'apparition */
     @keyframes calendarAppear {
       0% {
         opacity: 0;
@@ -516,7 +484,6 @@
       animation: calendarAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
-    /* Effet de particules autour du bouton */
     @keyframes ringPulse {
       0% { transform: scale(1); opacity: 0.6; }
       100% { transform: scale(1.3); opacity: 0; }
@@ -535,7 +502,6 @@
       animation-delay: 0.6s;
     }
 
-    /* Version responsive */
     @media (max-width: 480px) {
       .calendar-btn {
         padding: 10px 20px;
@@ -600,7 +566,6 @@
       padding: 0 5px;
     }
 
-    /* Séparation entre les versets */
     .verse-divider {
       width: 60px;
       height: 2px;
@@ -609,7 +574,6 @@
       opacity: 0.5;
     }
 
-    /* Version mobile améliorée */
     @media (max-width: 480px) {
       .verse-text {
         font-size: 15px;
@@ -630,15 +594,15 @@
 </head>
 <body>
 
-
 <div class="story" id="story">
   <div class="phone-sticky">
     <div class="phone">
       <div class="screen" id="screen">
 
-        <video class="video-bg" id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="img_1.png">
+        <video class="video-bg" id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto">
           <source src="hhh.mp4" type="video/mp4">
         </video>
+
         <!-- Page 1 : Coucher de soleil -->
         <div class="scene-bg hidden" id="bg0">
           <img src="img_1.png" alt="Coucher de soleil"/>
@@ -854,14 +818,11 @@
     document.getElementById('bg5')
   ];
 
-  // Forcer la lecture de la vidéo sur mobile
   const video = document.getElementById('bgVideo');
 
-  // Fonction pour démarrer la vidéo
   function startVideo() {
     video.play().catch(function(error) {
       console.log("La vidéo ne peut pas être lue automatiquement:", error);
-      // Réessayer au clic
       document.addEventListener('click', function playVideo() {
         video.play();
         document.removeEventListener('click', playVideo);
@@ -869,10 +830,8 @@
     });
   }
 
-  // Démarrer la vidéo au chargement
   document.addEventListener('DOMContentLoaded', startVideo);
 
-  // Redémarrer si la vidéo s'arrête
   video.addEventListener('pause', function() {
     if (video.currentTime > 0 && !video.paused) {
       // Ne rien faire
@@ -881,7 +840,6 @@
 
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
-  // Fonction pour révéler la date et afficher le bouton calendrier
   function revealDateGift(event, element) {
     if (event) {
       event.stopPropagation();
@@ -915,7 +873,6 @@
       box.classList.remove('opening');
       box.classList.add('revealed');
 
-      // Afficher le bouton calendrier avec animation
       const calendarBtn = box.querySelector('.calendar-btn');
       if (calendarBtn) {
         calendarBtn.style.display = 'inline-flex';
@@ -925,7 +882,6 @@
     }, 600);
   }
 
-  // Fonction pour ajouter au calendrier
   function addToCalendar(event) {
     if (event) {
       event.stopPropagation();
@@ -952,11 +908,9 @@
     const progress = total > 0 ? scrolled / total : 0;
     const activeFloat = progress * 6;
 
-    // Vidéo s'estompe au scroll
     const videoOpacity = clamp(1 - activeFloat * 1.2, 0, 1);
     video.style.opacity = videoOpacity;
 
-    // Pages
     panels.forEach((p, i) => {
       const d = 1 - Math.abs(activeFloat - i);
       const op = clamp(d, 0, 1);
@@ -977,30 +931,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   onScroll();
-
-  // Musique
-  const bgMusic = document.getElementById('bgMusic');
-  let musicPlaying = false;
-
-  function startMusic(){
-    bgMusic.volume = 0.6;
-    bgMusic.play().then(() => {
-      musicPlaying = true;
-    }).catch(() => {
-      musicPlaying = false;
-    });
-  }
-
-  window.addEventListener('load', startMusic);
-
-  window.addEventListener('click', (e) => {
-    if (e.target.closest('.date-gift-container')) {
-      return;
-    }
-    if (!musicPlaying) startMusic();
-  }, { once: true });
-
-  window.addEventListener('touchstart', () => { if (!musicPlaying) startMusic(); }, { once: true });
 </script>
 
 </body>
