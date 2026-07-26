@@ -38,7 +38,6 @@
       text-transform:uppercase;
       margin-bottom:10px;
     }
-    /* ========== STYLES POUR LE CADEAU (DATE CACHÉE) ========== */
     /* ========== STYLES POUR LA DATE CACHÉE ========== */
     .date-gift-container {
       display: inline-block;
@@ -158,41 +157,6 @@
       animation: goldParticles 0.8s ease forwards;
     }
 
-    .revealed-date {
-      display: none !important;
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
-      font-weight: 600;
-      color: #2E3B3A;
-      letter-spacing: 0.08em;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.3);
-    }
-
-    /* Animation d'ouverture */
-    @keyframes giftOpen {
-      0% { transform: scale(1); }
-      30% { transform: scale(1.15); }
-      50% { transform: scale(0.95); }
-      70% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .gift-box.opening {
-      animation: giftOpen 0.6s ease;
-    }
-
-    /* Étoiles qui apparaissent */
-    @keyframes sparkle {
-      0% { transform: scale(0) rotate(0deg); opacity: 1; }
-      100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
-    }
-
-    .sparkle {
-      position: absolute;
-      font-size: 20px;
-      pointer-events: none;
-      animation: sparkle 0.8s ease forwards;
-    }
     .heading{
       font-family:'Cinzel', serif;
       font-size:clamp(24px,4vw,32px);
@@ -383,48 +347,218 @@
     .date-line bdi{
       unicode-bidi:isolate;
     }
+
     /* ========== STYLES POUR LE BOUTON CALENDRIER ========== */
+    .calendar-wrapper {
+      margin-top: 12px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
     .calendar-btn {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 25px;
-        background: linear-gradient(145deg, #D9BE8C, #B98F4A);
-        border: none;
-        border-radius: 50px;
-        color: #2E3B3A;
-        font-family: 'Cinzel', serif;
-        font-size: 12px;
-        letter-spacing: 0.1em;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #D9BE8C 0%, #B98F4A 100%);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 60px;
+      color: #2E3B3A;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 20px rgba(185, 143, 74, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Effet de brillance au survol */
+    .calendar-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.6s;
+      pointer-events: none;
+    }
+
+    .calendar-btn:hover::before {
+      opacity: 1;
     }
 
     .calendar-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        background: linear-gradient(145deg, #e8d5a8, #c4a07a);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 35px rgba(185, 143, 74, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+      background: linear-gradient(135deg, #e8d5a8 0%, #c4a07a 100%);
+    }
+
+    .calendar-btn:active {
+      transform: translateY(0) scale(0.98);
     }
 
     .calendar-btn .icon {
-        margin-right: 8px;
-        font-size: 16px;
+      font-size: 20px;
+      line-height: 1;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
     }
 
-    /* Animation d'apparition du bouton */
-    @keyframes fadeInUp {
-        0% { opacity: 0; transform: translateY(20px); }
-        100% { opacity: 1; transform: translateY(0); }
+    .calendar-btn .text {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .calendar-btn .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      background: rgba(46, 59, 58, 0.15);
+      border-radius: 30px;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: #2E3B3A;
+      margin-left: 4px;
+    }
+
+    /* Animation d'apparition */
+    @keyframes calendarAppear {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .calendar-btn.show {
-        animation: fadeInUp 0.5s ease forwards;
+      animation: calendarAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* Effet de particules autour du bouton */
+    @keyframes ringPulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.3); opacity: 0; }
+    }
+
+    .calendar-btn .ring {
+      position: absolute;
+      inset: -4px;
+      border: 2px solid rgba(185, 143, 74, 0.3);
+      border-radius: 60px;
+      animation: ringPulse 2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    .calendar-btn .ring:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    /* Version responsive */
+    @media (max-width: 480px) {
+      .calendar-btn {
+        padding: 10px 20px;
+        font-size: 11px;
+        gap: 8px;
+      }
+      .calendar-btn .icon {
+        font-size: 16px;
+      }
+      .calendar-btn .text {
+        font-size: 10px;
+      }
+    }
+
+    /* ========== STYLES POUR LE VERSET CORANIQUE ========== */
+    .verse-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 15px;
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
+      direction: rtl;
+    }
+
+    .verse-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 3.5vw, 22px);
+      line-height: 2.2;
+      color: #FBF6ED;
+      text-shadow: 0 2px 15px rgba(5, 25, 30, 0.8);
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 10px;
+      word-wrap: break-word;
+      word-break: break-word;
+      white-space: normal;
+    }
+
+    .verse-text .highlight {
+      color: #D9BE8C;
+      font-weight: 600;
+    }
+
+    .verse-reference {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(12px, 2vw, 16px);
+      color: #D9BE8C;
+      margin-top: 12px;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+    }
+
+    .verse-line {
+      display: block;
+      width: 100%;
+      max-width: 500px;
+      margin: 4px auto;
+      padding: 0 5px;
+    }
+
+    /* Séparation entre les versets */
+    .verse-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #D9BE8C, transparent);
+      margin: 12px auto;
+      opacity: 0.5;
+    }
+
+    /* Version mobile améliorée */
+    @media (max-width: 480px) {
+      .verse-text {
+        font-size: 15px;
+        line-height: 2.4;
+        padding: 0 5px;
+      }
+      .verse-container {
+        padding: 15px 10px;
+      }
+      .verse-line {
+        padding: 0 2px;
+      }
+      .verse-reference {
+        font-size: 11px;
+      }
     }
   </style>
 </head>
 <body>
 
+<audio id="bgMusic" src="Brooklyn-Duo-A-Thousand-Years-_WEDDING-VERSION_.mp3" loop preload="auto"></audio>
 
 <div class="story" id="story">
   <div class="phone-sticky">
@@ -476,20 +610,29 @@
 
         <!-- ========== CONTENU DES PAGES ========== -->
 
-        <!-- Page 0 : Bienvenue / Vidéo -->
+        <!-- Page 0 : Bienvenue avec le verset coranique -->
         <div class="names-tag" id="cap0">
-
-
-
-          <p class="names">
-            بسم الله الرحمن الرحيم
-            <br></br>
-            وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ [الروم:21]
-
-
-          </p>
+          <div class="verse-container">
+            <p class="verse-text">
+              <span class="verse-line" style="font-size: clamp(18px, 4vw, 26px); color: #D9BE8C; margin-bottom: 10px;">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              </span>
+              <span class="verse-line" style="margin-top: 8px;">
+                وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ
+                <span class="highlight">أَزْوَاجًا</span>
+              </span>
+              <span class="verse-line">
+                لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم
+                <span class="highlight">مَّوَدَّةً وَرَحْمَةً</span>
+              </span>
+              <span class="verse-line" style="color: #D9BE8C; font-style: italic;">
+                إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
+              </span>
+            </p>
+            <div class="verse-divider"></div>
+            <span class="verse-reference">✦ سورة الروم - الآية 21 ✦</span>
+          </div>
           <div class="rule"></div>
-
         </div>
 
         <!-- Page 1 : Invitation -->
@@ -509,15 +652,26 @@
             وذلك بمشيئة الله تعالى يوم
           <div class="date-gift-container" onclick="revealDateGift(event, this)">
             <div class="date-gift-box">
-              <span class="gift-icon">💫 اضغط هنا</span>
+              <span class="gift-icon">💫</span>
               <span class="gift-hint">✦ تاريخ الزفاف ✦</span>
-              <span class="revealed-date" dir="rtl"><bdi>6</bdi> ديسمبر 2026</span>
+              <span class="revealed-date">
+                6 ديسمبر 2026
+                <div class="calendar-wrapper">
+                  <button class="calendar-btn" id="calendarBtn" style="display:none;" onclick="addToCalendar(event)">
+                    <span class="ring"></span>
+                    <span class="ring"></span>
+                    <span class="icon">📅</span>
+                    <span class="text">Ajouter au calendrier</span>
+                    <span class="badge">✦</span>
+                  </button>
+                </div>
+              </span>
             </div>
           </div>
-            <br>
-            على الساعة <strong>16:30</strong>
-            <br><br>
-            ببلدية القصبة
+          <br>
+          على الساعة <strong>16:30</strong>
+          <br><br>
+          ببلدية القصبة
           </p>
         </div>
 
@@ -610,7 +764,6 @@
 </div>
 
 <script>
-
   const story = document.getElementById('story');
   const panels = [
     document.getElementById('cap0'),
@@ -635,12 +788,12 @@
   const video = document.getElementById('bgVideo');
 
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
-  // Fonction pour révéler la date comme un cadeau
-  // Fonction pour révéler la date
+
+  // Fonction pour révéler la date et afficher le bouton calendrier
   function revealDateGift(event, element) {
-    // Empêcher la propagation du clic
     if (event) {
       event.stopPropagation();
+      event.preventDefault();
     }
 
     const box = element.querySelector('.date-gift-box');
@@ -669,7 +822,34 @@
     setTimeout(() => {
       box.classList.remove('opening');
       box.classList.add('revealed');
+
+      // Afficher le bouton calendrier avec animation
+      const calendarBtn = box.querySelector('.calendar-btn');
+      if (calendarBtn) {
+        calendarBtn.style.display = 'inline-flex';
+        void calendarBtn.offsetWidth;
+        calendarBtn.classList.add('show');
+      }
     }, 600);
+  }
+
+  // Fonction pour ajouter au calendrier
+  function addToCalendar(event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
+    const eventTitle = "Mariage de Sana & Aref";
+    const eventLocation = "بلدية القصبة, Tunis";
+    const eventDescription = "Mariage de Sana et Aref - 6 Décembre 2026 à 16:30";
+
+    const startDate = "20261206T163000";
+    const endDate = "20261206T200000";
+
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(eventDescription)}&location=${encodeURIComponent(eventLocation)}`;
+
+    window.open(googleCalendarUrl, '_blank');
   }
 
   function onScroll(){
@@ -720,9 +900,15 @@
   }
 
   window.addEventListener('load', startMusic);
-  window.addEventListener('scroll', () => { if (!musicPlaying) startMusic(); }, { passive: true, once: true });
+
+  window.addEventListener('click', (e) => {
+    if (e.target.closest('.date-gift-container')) {
+      return;
+    }
+    if (!musicPlaying) startMusic();
+  }, { once: true });
+
   window.addEventListener('touchstart', () => { if (!musicPlaying) startMusic(); }, { once: true });
-  window.addEventListener('click', () => { if (!musicPlaying) startMusic(); }, { once: true });
 </script>
 
 </body>
